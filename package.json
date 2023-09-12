@@ -1,38 +1,43 @@
 {
+  "name": "yt-portfolio",
+  "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "export": "next export",
-    "lint": "next lint",
-    "deploy": "firebase deploy hosting"
-  },
   "dependencies": {
-    "@emailjs/browser": "^3.4.0",
-    "bad-words": "^3.0.4",
-    "gsap": "^3.8.0",
-    "lottie-react": "^2.4.0",
-    "lottie-web": "^5.8.1",
-    "next": "latest",
-    "next-pwa": "^5.4.4",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-hot-toast": "^2.2.0",
-    "react-reveal": "^1.2.2",
-    "sass": "^1.43.4",
-    "typed.js": "^2.0.12",
-    "url-loader": "^4.1.1",
-    "vanilla-tilt": "^1.7.2"
+    "@emotion/react": "^11.10.5",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^18.2.0",
+    "react-awesome-reveal": "^4.1.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0",
+    "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
+    "styled-components": "^5.3.5",
+    "web-vitals": "^2.1.4"
   },
-  "devDependencies": {
-    "@iconify/react": "^4.1.1",
-    "autoprefixer": "^10.2.6",
-    "eslint": "7.*",
-    "eslint-config-next": "*",
-    "install": "^0.13.0",
-    "npm": "^9.8.0",
-    "postcss": "^8.3.5",
-    "tailwindcss": "^2.2.4"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

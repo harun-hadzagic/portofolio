@@ -5,6 +5,8 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import styled from 'styled-components';
 import eCommerce from "../../assets/images/e-commerce.png"
 import quiz from "../../assets/images/quiz.png"
+import library from "../../assets/images/library.png"
+import petAdoption from "../../assets/images/pet-adoption.png"
 
 let data = [
     {
@@ -18,15 +20,15 @@ let data = [
         ,
         title:"Quiz App"},
     {
-        img : "https://res.cloudinary.com/ghazni/image/upload/v1661323981/Yt-portfolio/ui2_wtollo.png",
+        img : library,
         disc : "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet iure rerum obcaecati et laborum earum!"
         ,
-        title:""},
+        title:"Library"},
     {
-        img : "https://res.cloudinary.com/ghazni/image/upload/v1661323980/Yt-portfolio/ui3_akynn4.png",
+        img : petAdoption,
         disc : "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet iure rerum obcaecati et laborum earum!"
         ,
-        title:""},
+        title:"Pet adoption"},
     {
         img : "https://res.cloudinary.com/ghazni/image/upload/v1661323979/Yt-portfolio/ui1_n3uiaz.png",
         disc : "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet iure rerum obcaecati et laborum earum!"

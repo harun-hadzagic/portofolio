@@ -1,11 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { AiOutlineInstagram } from "react-icons/ai";
+import { AiFillGithub, AiOutlineDownload, AiOutlineInstagram } from "react-icons/ai";
 import { GiEarthAmerica } from "react-icons/gi";
 import { FaLinkedinIn } from "react-icons/fa";
 import { Slide } from "react-awesome-reveal";
+import { CgFileDocument } from "react-icons/cg";
 
 const ProfComponent = () => {
+
+  const scrollToBottom = () =>{
+    window.scrollTo(0, document.body.scrollHeight);
+
+  }
   return (
     <Container id="home">
       <Slide direction="left">
@@ -16,32 +22,39 @@ const ProfComponent = () => {
           <h1 className="green">Harun Hadzagic</h1>
           <h3>Full stack web developer</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores,
-            iusto. Adipisci in qui officia provident tenetur sequi, deserunt
-            corporis quos?
+          I'm a passionate web developer dedicated to creating elegant and efficient websites. With expertise in front-end and back-end technologies, I bring ideas to life through code and creativity.
           </p>
-          <button>Let's talk</button>
+          <button onClick={scrollToBottom}>Let's talk</button>
           <Social>
             <p>Check out my</p>
             <div className="social-icons">
               <span>
-                <a href="/">
+                <a href="https://www.instagram.com/harun.hadzagic/" target="blank">
                   <AiOutlineInstagram />
                 </a>
               </span>
               <span>
-                <a href="/">
-                  <GiEarthAmerica />
+                <a href="https://github.com/harun-hadzagic" target="blank">
+                  <AiFillGithub />
                 </a>
               </span>
               <span>
-                <a href="/">
+                <a href="https://www.linkedin.com/in/harun-h-437807136/" target="blank">
                   <FaLinkedinIn />
                 </a>
               </span>
             </div>
           </Social>
+          <br/>
+          <hr/>
+       <span >                
+        <a href="https://drive.google.com/file/d/17JG_DYLuiydW-wPqSNoQHXG8jmEdp-4T/view?usp=sharing" target="blank">
+          <button  style={{fontSize: '1.5rem', textDecoration: "none"}}>Check out my CV</button>
+        </a>
+        </span> 
         </Texts>
+
+
       </Slide>
       <Slide direction="right">
         <Profile>

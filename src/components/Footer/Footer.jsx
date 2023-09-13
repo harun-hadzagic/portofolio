@@ -1,13 +1,15 @@
-import React from "react";
+import React, {  useState } from "react";
 import styled from "styled-components";
 import { MdAlternateEmail } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { HiOutlineMailOpen } from "react-icons/hi";
-import { AiFillGithub, AiFillLinkedin, AiOutlineArrowUp } from "react-icons/ai";
-import { BsFacebook, BsSlack } from "react-icons/bs";
+import { AiFillGithub, AiFillLinkedin, AiOutlineArrowUp, AiOutlineInstagram } from "react-icons/ai";
+import { BsFacebook } from "react-icons/bs";
 import { FiMail, FiPhoneCall } from "react-icons/fi";
 import { Slide, Zoom, Fade } from "react-awesome-reveal";
-
+import emailjs from '@emailjs/browser';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Footer = () => {
   const scrollUp = () => {
     window.scroll({
@@ -15,18 +17,68 @@ const Footer = () => {
       behavior: "smooth",
     });
   };
+  const [loader, setLoader] = useState(false)
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+    error: ""
+  })
+  const handleChange = (name) => (event) =>{
+    setFormData({ ...formData, [name]: event.target.value });
+  }
+  const sendEmail = (e)=>{
+    e.preventDefault();
+    if(formData.name.length ===0) return setFormData({...formData, error: "Please enter your name"})
+    if(formData.email.length ===0) return setFormData({...formData, error: "Please enter your email"})
+    if(formData.message.length ===0) return setFormData({...formData, error: "Please enter your message"})
+    setLoader(true)
+    emailjs.sendForm('service_t8dni6r', 'template_2sa8xqd', document.querySelector("form"), 'ac8Lt9gkcjvry3bRl')
+      .then((result) => {
+          setFormData({
+            name: "",
+            email: "",
+            message: "",
+            error: ""
+          })
+          toast.dark("Message sent!", {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+    setLoader(false)
+          
+      }, (error) => {
+        toast.dark("Whoops, something wnt wrong..", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+          setLoader(false)
+
+      });
+  }
   return (
     <Container id="footer">
+      <ToastContainer></ToastContainer>
       <Profile>
         <Slide direction="left" delay={1}>
           <h1>Portfolio</h1>
         </Slide>
         <div className="address">
           <Slide direction="left">
-            <h1>Address:</h1>
+            <h1>Location:</h1>
           </Slide>
           <Slide direction="left">
-            <p>1030 Southwood Dr San Luis Obispo, California(CA), 93401</p>
+            <p>Bosnia and Herzegovina,<br/> 71000 Sarajevo</p>
           </Slide>
         </div>
         <div className="links">
@@ -38,7 +90,7 @@ const Footer = () => {
               <FiPhoneCall />
             </span>
             <Slide direction="left">
-              <a href="tel:+4733378901">+47 333 78 901</a>
+              <a href="tel:+38761531086">+387 61 531 086</a>
             </Slide>
           </div>
           <div>
@@ -48,7 +100,7 @@ const Footer = () => {
               </span>
             </Slide>
             <Slide>
-              <a href="mailto:miladamiri@gmail.com">miladamiri@gmail.com</a>
+              <a href="mailto:harun.hadzagic@gmail.com">harun.hadzagic@gmail.com</a>
             </Slide>
           </div>
         </div>
@@ -59,29 +111,29 @@ const Footer = () => {
           <div className="icons">
             <Zoom>
               <span>
-                <a href="/">
+                <a href="https://github.com/harun-hadzagic" target="blank">
                   <AiFillGithub />
                 </a>
               </span>
             </Zoom>
             <Zoom>
               <span>
-                <a href="/">
+                <a href="https://www.linkedin.com/in/harun-h-437807136/" target="blank">
                   <AiFillLinkedin />
                 </a>
               </span>
             </Zoom>
             <Zoom>
               <span>
-                <a href="/">
+                <a href="https://www.facebook.com/harun.hadzagic/" target="blank">
                   <BsFacebook />
                 </a>
               </span>
             </Zoom>
             <Zoom>
               <span>
-                <a href="/">
-                  <BsSlack />
+                <a href="https://www.instagram.com/harun.hadzagic/" target="blank">
+                  <AiOutlineInstagram />
                 </a>
               </span>
             </Zoom>
@@ -95,26 +147,32 @@ const Footer = () => {
       </Profile>
       <Form>
         <Slide direction="right">
-          <form>
+          <form onSubmit={sendEmail}>
             <div className="name">
               <span>
                 <CgProfile />
               </span>
-              <input type="text" placeholder="Fullname..." />
+              <input type="text" placeholder="Fullname..." name="user_name" value={formData.name} onChange={handleChange("name")}/>
             </div>
             <div className="email">
               <span>
                 <MdAlternateEmail />
               </span>
-              <input type="email" placeholder="Email..." />
+              <input type="email" placeholder="Email..." name="user_email"value={formData.email}onChange={handleChange("email")}/>
             </div>
             <div className="message">
               <span className="messageIcon">
                 <FiMail />
               </span>
-              <textarea cols="30" rows="10" placeholder="Message..."></textarea>
+              <textarea cols="30" rows="10" placeholder="Message..." name="message"value={formData.message}onChange={handleChange("message")}></textarea>
             </div>
-            <button>Submit</button>
+            {formData.error && <div className="error">
+              <span>
+                {formData.error}
+              </span>
+            </div>}
+
+            {loader ? <div className="loader"></div> : <button type="submit" value="Send">Submit</button>}
           </form>
         </Slide>
       </Form>

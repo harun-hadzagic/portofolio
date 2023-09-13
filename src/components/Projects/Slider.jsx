@@ -3,28 +3,35 @@ import Slider from 'react-slick';
 import Project from './Project';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import styled from 'styled-components';
+import eCommerce from "../../assets/images/e-commerce.png"
+import quiz from "../../assets/images/quiz.png"
 
 let data = [
     {
-        img : "https://res.cloudinary.com/ghazni/image/upload/v1661324124/Yt-portfolio/ui5_mnvdaw.png",
-        disc : "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet iure rerum obcaecati et laborum earum!"
+        img : eCommerce,
+        disc : "E commerce ",
+        title: "Online Book Store"
     },
     {
-        img : "https://res.cloudinary.com/ghazni/image/upload/v1661324074/Yt-portfolio/ui4_jku3ol.png",
+        img : quiz,
         disc : "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet iure rerum obcaecati et laborum earum!"
-    },
+        ,
+        title:"Quiz App"},
     {
         img : "https://res.cloudinary.com/ghazni/image/upload/v1661323981/Yt-portfolio/ui2_wtollo.png",
         disc : "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet iure rerum obcaecati et laborum earum!"
-    },
+        ,
+        title:""},
     {
         img : "https://res.cloudinary.com/ghazni/image/upload/v1661323980/Yt-portfolio/ui3_akynn4.png",
         disc : "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet iure rerum obcaecati et laborum earum!"
-    },
+        ,
+        title:""},
     {
         img : "https://res.cloudinary.com/ghazni/image/upload/v1661323979/Yt-portfolio/ui1_n3uiaz.png",
         disc : "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet iure rerum obcaecati et laborum earum!"
-    }
+        ,
+        title:""}
 ];
 
 var settings = {

@@ -8,8 +8,7 @@ const Projects = () => {
     <Container id='project'>
         <Zoom>
             <h1>Recent <span className="green">Projects</span></h1>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto doloremque 
-            voluptate excepturi porro sed totam quis animi dolorum rerum earum.</p>
+            <p>Here, you'll discover a showcase of my work, highlighting my passion for coding and problem-solving. Explore the projects that define my journey.</p>
         </Zoom>
         <Slide>
             <SliderComp/>

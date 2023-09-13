@@ -19,25 +19,22 @@ const Services = () => {
         <Slide direction="left">
           <Card
             Icon={MdDesignServices}
-            title={"ui/ux designer"}
-            disc={`Lorem ipsum dolor sit amet consectetur 
-                adipisicing elit. Commodi et asperiores cum exercitationem officia rem amet minus magnam? Cum, voluptatem?`}
+            title={"Responsive Website Design"}
+            disc={`Create visually appealing and user-friendly websites optimized for various devices and screen sizes, ensuring a seamless user experience across desktops, tablets, and smartphones.`}
           />
         </Slide>
         <Slide direction="up">
           <Card
             Icon={FiCodesandbox}
-            title={"graphic designer"}
-            disc={`Lorem ipsum dolor sit amet consectetur 
-                adipisicing elit. Commodi et asperiores cum exercitationem officia rem amet minus magnam? Cum, voluptatem?`}
+            title={"Custom Web Application Development"}
+            disc={`Develop tailor-made web applications that address your specific needs, from concept to deployment, utilizing both front-end and back-end technologies.`}
           />
         </Slide>
         <Slide direction="right">
           <Card
             Icon={CgWebsite}
-            title={"web designer"}
-            disc={`Lorem ipsum dolor sit amet consectetur 
-                adipisicing elit. Commodi et asperiores cum exercitationem officia rem amet minus magnam? Cum, voluptatem?`}
+            title={"Database Design and Management"}
+            disc={`Design and maintain robust databases to efficiently store and manage data for your web applications, ensuring data integrity, security, and optimal performance.`}
           />
         </Slide>
       </Cards>

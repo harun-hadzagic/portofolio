@@ -84,7 +84,7 @@ const Clients = () => {
     <Container id='client'>
         <Slide direction="left">
             <span className="green">testimonials</span>
-            <h1>what clients say</h1>
+            <h1>what people say</h1>
         </Slide>
         <Testimonials>
             <Slider ref={arrowRef} {...settings}>

@@ -102,11 +102,11 @@ const SliderComp = () => {
       </Slider>
       <Buttons>
         <button
-        style={{backgroundColor: "#EBE4D1", opacity: left ? "100%" :" 80%"}} onMouseEnter={()=>setLeft(true)} onMouseLeave={()=>setLeft(false)}
+        style={{backgroundColor: "#fff", opacity: left ? "100%" :" 50%"}} onMouseEnter={()=>setLeft(true)} onMouseLeave={()=>setLeft(false)}
           onClick={() => arrowRef.current.slickPrev()}
           className='back'><IoIosArrowBack /></button>
         <button
-          style={{backgroundColor: "#EBE4D1", opacity: right ? "100%" :" 80%"}} onMouseEnter={()=>setRight(true)} onMouseLeave={()=>setRight(false)}
+          style={{backgroundColor: "#fff", opacity: right ? "100%" :" 50%"}} onMouseEnter={()=>setRight(true)} onMouseLeave={()=>setRight(false)}
           onClick={() => arrowRef.current.slickNext()}
           className='next'><IoIosArrowForward /></button>
       </Buttons>

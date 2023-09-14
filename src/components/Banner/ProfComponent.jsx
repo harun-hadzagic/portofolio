@@ -59,7 +59,7 @@ const ProfComponent = () => {
           <img
             src="https://lh3.googleusercontent.com/drive-viewer/AITFw-wEf6a4YkY3-M8tBLxBww2CLmJQFL4nmBRzwBY4FJRd6Ibwf8GDAGDuZL7XGydZzaxR5Kd1Oz_epxPzZhUVgSI7xBqE=s1600"
             alt="profile"
-            style={{borderRadius: "3rem"}}
+            // style={{borderRadius: "3rem"}}
           />
         </Profile>
       </Slide>

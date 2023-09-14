@@ -15,20 +15,20 @@ let clients = [
         disc : `Harun's unwavering positivity, unyielding optimism, strong work ethic, and 'can-do' attitude showcase a remarkable level of maturity and an insatiable intellectual curiosity. His assignments consistently exhibit exceptional quality, and his ability to tackle challenges with a smile and unwavering determination is truly commendable.`
     },
     {
-        name : "John Michel",
-        position : "web developer",
-        img_url : "https://t4.ftcdn.net/jpg/02/90/27/39/360_F_290273933_ukYZjDv8nqgpOBcBUo5CQyFcxAzYlZRW.jpg",
-        stars : 4,
-        disc : `Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-        Temporibus consequuntur dolores labore natus similique nemo doloribus cum accusantium adipisci maiores.`
+        name : "Ajsela Felic",
+        position : "UI/UX designer",
+        img_url : "https://media.licdn.com/dms/image/D4D03AQHhYoFKVRpobw/profile-displayphoto-shrink_800_800/0/1676295363862?e=1700092800&v=beta&t=BAKiC66cpq4p-IJKBaIHL5WznKg4lSWYL21jOO6D8_0",
+        stars : 5,
+        link: "https://www.linkedin.com/in/ajselafelic/",
+        disc : `Harun is extremely nice to work with. He is friendly and social at work. He is detailed at his task, and is dedicated to everything he is working on.`
     },
     {
-        name : "John Michel",
-        position : "web developer",
-        img_url : "https://t4.ftcdn.net/jpg/02/90/27/39/360_F_290273933_ukYZjDv8nqgpOBcBUo5CQyFcxAzYlZRW.jpg",
+        name : "Amila Omanovic",
+        position : "project manager",
+        img_url : "https://media.licdn.com/dms/image/D4D03AQHaU7FLiKUM1Q/profile-displayphoto-shrink_800_800/0/1677084475547?e=1700092800&v=beta&t=xwiYQFC5GUlPqMzMFQY4RE7-f1MCGxIV-S7bdUOPtIo",
         stars : 5,
-        disc : `Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-        Temporibus consequuntur dolores labore natus similique nemo doloribus cum accusantium adipisci maiores.`
+        link: "https://www.linkedin.com/in/amila-omanovi%C4%87-a9764311a/",
+        disc : ``
     },
     {
         name : "John Michel",

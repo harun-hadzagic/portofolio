@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Slider from 'react-slick';
 import Project from './Project';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -88,6 +88,8 @@ var settings = {
   ]
 };
 const SliderComp = () => {
+  const [right, setRight]  = useState(false)
+  const [left, setLeft] = useState(false)
   const arrowRef = useRef(null);
   let sliderProject = "";
   sliderProject = data.map((item, i) => (
@@ -100,9 +102,11 @@ const SliderComp = () => {
       </Slider>
       <Buttons>
         <button
+        style={{backgroundColor: "#EBE4D1", opacity: left ? "100%" :" 80%"}} onMouseEnter={()=>setLeft(true)} onMouseLeave={()=>setLeft(false)}
           onClick={() => arrowRef.current.slickPrev()}
           className='back'><IoIosArrowBack /></button>
         <button
+          style={{backgroundColor: "#EBE4D1", opacity: right ? "100%" :" 80%"}} onMouseEnter={()=>setRight(true)} onMouseLeave={()=>setRight(false)}
           onClick={() => arrowRef.current.slickNext()}
           className='next'><IoIosArrowForward /></button>
       </Buttons>

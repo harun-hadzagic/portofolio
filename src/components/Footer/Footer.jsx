@@ -171,9 +171,9 @@ const Footer = () => {
                 {formData.error}
               </span>
             </div>}
-
-            {loader ? <div className="loader"></div> : <button type="submit" value="Send">Submit</button>}
-          </form>
+<div style={{display: "flex", justifyContent: "right", alignItems: "center"}}>
+            {loader ? <div className="loader"></div> : <button type="submit" style={{color: "white"}} value="Send">Submit</button>}
+            </div>         </form>
         </Slide>
       </Form>
     </Container>

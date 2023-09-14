@@ -85,14 +85,14 @@ const Footer = () => {
           <Slide direction="left">
             <h1>Contact me directly:</h1>
           </Slide>
-          <div>
+          {/* <div>
             <span>
               <FiPhoneCall />
             </span>
             <Slide direction="left">
               <a href="tel:+38761531086">+387 61 531 086</a>
             </Slide>
-          </div>
+          </div> */}
           <div>
             <Slide direction="left">
               <span>

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {IoIosQuote} from "react-icons/io";
-import {AiOutlineStar} from "react-icons/ai";
+import {AiFillStar} from "react-icons/ai";
 
 const ClientSlider = (props) => {
     const {name, position, img_url, stars, disc, link} = props.item;
@@ -15,7 +15,7 @@ const ClientSlider = (props) => {
             <div>
                 {Array(stars).fill().map((_, i) => (
                     <span className='star' key={i}>
-                        <AiOutlineStar/>
+                        <AiFillStar/>
                     </span>
                 ))}
             </div>

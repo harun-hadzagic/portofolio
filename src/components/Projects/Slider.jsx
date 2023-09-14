@@ -17,33 +17,33 @@ let data = [
   },
   {
     img: quiz,
-    disc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet iure rerum obcaecati et laborum earum!"
+    disc: "This app was created to allow mentors to create edit and delete quizes that they would like their students to take. The app also allows students to take a quiz and keep track of their results."
     ,
     title: "Quiz App"
   },
   {
     img: library,
-    disc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet iure rerum obcaecati et laborum earum!"
+    disc: "One place to browse books, author and publishers, with one admin who can add, edit, create or remove any one of the three."
     ,
     title: "Library"
   },
   {
     img: petAdoption,
-    disc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet iure rerum obcaecati et laborum earum!"
+    disc: "An app createt during a hackathon and it allowes users to post pets up for adoption along with many more services."
     ,
     title: "Pet adoption"
   },
   {
     img: videoStream,
-    disc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet iure rerum obcaecati et laborum earum!"
+    disc: "A live streaming platform allowing a streamer to start streaming and a viewer to start viewing the stream."
     ,
-    title: ""
+    title: "Live Stream Platform"
   },
   {
     img: hangman,
-    disc: "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet iure rerum obcaecati et laborum earum!"
+    disc: "The game we all grew up with, hangman!"
     ,
-    title: ""
+    title: "Hangman"
   }
 ];
 

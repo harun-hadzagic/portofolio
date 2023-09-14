@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { AiFillGithub, AiOutlineDownload, AiOutlineInstagram } from "react-icons/ai";
-import { GiEarthAmerica } from "react-icons/gi";
+import { AiFillGithub, AiOutlineInstagram } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
 import { Slide } from "react-awesome-reveal";
-import { CgFileDocument } from "react-icons/cg";
 
 const ProfComponent = () => {
 
@@ -61,6 +59,7 @@ const ProfComponent = () => {
           <img
             src="https://lh3.googleusercontent.com/drive-viewer/AITFw-wEf6a4YkY3-M8tBLxBww2CLmJQFL4nmBRzwBY4FJRd6Ibwf8GDAGDuZL7XGydZzaxR5Kd1Oz_epxPzZhUVgSI7xBqE=s1600"
             alt="profile"
+            style={{borderRadius: "3rem"}}
           />
         </Profile>
       </Slide>

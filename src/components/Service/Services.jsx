@@ -20,15 +20,15 @@ import npm from "../../assets/images/npm.png"
 import vue from "../../assets/images/vue.svg"
 import socket from "../../assets/images/socket.png"
 import redux from "../../assets/images/redux.svg"
-
-
+import github from "../../assets/images/github.png"
+import sql from "../../assets/images/sql-server.png"
 
 
 
 
 
 const Services = () => {
-const skillsArray = [html,css,javaScript, typeScript,react, redux,vue,  nodeJs, expressjs, bootstrap,  firebase, mongoDb,socket, git,npm ]
+const skillsArray = [javaScript, typeScript,react,vue,  nodeJs,  firebase, mongoDb, sql,github,  git ,html,css,]
   return (
     <Container id="service">
       <Slide direction="down">

@@ -4,7 +4,10 @@ import {IoIosQuote} from "react-icons/io";
 import {AiOutlineStar} from "react-icons/ai";
 
 const ClientSlider = (props) => {
-    const {name, position, img_url, stars, disc} = props.item;
+    const {name, position, img_url, stars, disc, link} = props.item;
+    const navigateToPerson = ()=>{
+        window.open(link)
+    }
   return (
     <Container>
         <Header>
@@ -20,7 +23,7 @@ const ClientSlider = (props) => {
         <Body>
             {disc}
         </Body>
-        <Footer>
+        <Footer style={{cursor: "pointer"}} onClick={navigateToPerson}>
             <img src={img_url} alt={name} />
             <div className="details">
                 <h1>{name}</h1>

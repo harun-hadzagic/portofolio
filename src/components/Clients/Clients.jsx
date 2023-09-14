@@ -7,12 +7,12 @@ import { Slide } from 'react-awesome-reveal';
 
 let clients = [
     {
-        name : "John Michel",
-        position : "web developer",
-        img_url : "https://t4.ftcdn.net/jpg/02/90/27/39/360_F_290273933_ukYZjDv8nqgpOBcBUo5CQyFcxAzYlZRW.jpg",
-        stars : 3,
-        disc : `Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-        Temporibus consequuntur dolores labore natus similique nemo doloribus cum accusantium adipisci maiores.`
+        name : "Samir Arapcic",
+        position : "web developer | coding mentor",
+        img_url : "https://media.licdn.com/dms/image/C5603AQHj3G2ChOSI0A/profile-displayphoto-shrink_800_800/0/1517503652562?e=1700092800&v=beta&t=rtqBOnyWR_EAcYeIYJjJkPnJjzSBUPswG29kzKO5b-4",
+        stars : 5,
+        link: "https://www.linkedin.com/in/samir-arapcic-05964470/",
+        disc : `Harun's unwavering positivity, unyielding optimism, strong work ethic, and 'can-do' attitude showcase a remarkable level of maturity and an insatiable intellectual curiosity. His assignments consistently exhibit exceptional quality, and his ability to tackle challenges with a smile and unwavering determination is truly commendable.`
     },
     {
         name : "John Michel",

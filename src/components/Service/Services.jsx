@@ -5,8 +5,30 @@ import { CgWebsite } from "react-icons/cg";
 import styled from "styled-components";
 import Card from "./Card";
 import { Slide } from "react-awesome-reveal";
+import css from "../../assets/images/css.svg"
+import firebase from "../../assets/images/firebase.svg"
+import git from "../../assets/images/git.svg"
+import html from "../../assets/images/html.svg"
+import javaScript from "../../assets/images/javascript.svg"
+import mongoDb from "../../assets/images/mongodb.svg"
+import nodeJs from "../../assets/images/nodejs.svg"
+import react from "../../assets/images/react.svg"
+import typeScript from "../../assets/images/typescript.svg"
+import expressjs from "../../assets/images/expressjs.svg"
+import bootstrap from "../../assets/images/bootstrap.svg"
+import npm from "../../assets/images/npm.png"
+import vue from "../../assets/images/vue.svg"
+import socket from "../../assets/images/socket.png"
+import redux from "../../assets/images/redux.svg"
+
+
+
+
+
+
 
 const Services = () => {
+const skillsArray = [html,css,javaScript, typeScript,react, redux,vue,  nodeJs, expressjs, bootstrap,  firebase, mongoDb,socket, git,npm ]
   return (
     <Container id="service">
       <Slide direction="down">
@@ -38,6 +60,20 @@ const Services = () => {
           />
         </Slide>
       </Cards>
+      <br/>
+      <Slide direction="up">
+        <h2>
+          My <span className="green">Skills</span>
+        </h2>
+      </Slide>
+      <Slide direction="left">
+        <Container style={{display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap"}}>
+      {skillsArray.map((skill, index)=>{
+        return <img src={skill} key={index} height={"60rem"} style={{margin: "1rem"}} alt="logo"/>
+      })}
+      </Container>
+      </Slide>
+      
     </Container>
   );
 };

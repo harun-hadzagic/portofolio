@@ -46,7 +46,7 @@ const ProfComponent = () => {
           <br/>
           <hr/>
        <span >                
-        <a href="https://drive.google.com/file/d/17JG_DYLuiydW-wPqSNoQHXG8jmEdp-4T/view?usp=sharing" target="blank">
+        <a href="https://drive.google.com/file/d/1xqKJoWVSRiY9L_V32P4ibgd0h9SWYYLZ/view?usp=sharing" target="blank">
           <button  style={{fontSize: '1.5rem', textDecoration: "none"}}>Check out my CV</button>
         </a>
         </span> 

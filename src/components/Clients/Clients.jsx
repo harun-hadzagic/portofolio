@@ -22,15 +22,14 @@ let clients = [
         link: "https://www.linkedin.com/in/amila-omanovi%C4%87-a9764311a/",
         disc : `Harun is a committed team member and one of key drivers of our high client satisfaction scores. He sets very ambitious goals for himself and what’s impressive is that he manages to meet them all. I appreciate that I can always count on him to treat all his tasks with importance. That’s what makes him a reliable team member. Furthermore, he’s an excellent communicator and keeps me up to date on his progress, ensuring we’re always on the same page. He often shows initiative, has a great eye for detail and consistently produces high work quality. `
     },
-    // {
-    //     name : "Sulejman Catibusic",
-    //     position : "a programmer at heart",
-    //     img_url : "https://media.licdn.com/dms/image/C5603AQEUAEK7XunMpg/profile-displayphoto-shrink_800_800/0/1517532784158?e=1700092800&v=beta&t=yUSYXzvpuLlura-IYrPo4RHQ7Vw7G8c-MAIeEIENRV0",
-    //     stars : 5,
-    //     link:"https://www.linkedin.com/in/sulejman-catibusic-2991354a/",
-    //     disc : `Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-    //     Temporibus consequuntur dolores labore natus similique nemo doloribus cum accusantium adipisci maiores.`
-    // },
+    {
+        name : "Sulejman Catibusic",
+        position : "a programmer at heart",
+        img_url : "https://media.licdn.com/dms/image/C5603AQEUAEK7XunMpg/profile-displayphoto-shrink_800_800/0/1517532784158?e=1700092800&v=beta&t=yUSYXzvpuLlura-IYrPo4RHQ7Vw7G8c-MAIeEIENRV0",
+        stars : 5,
+        link:"https://www.linkedin.com/in/sulejman-catibusic-2991354a/",
+        disc : `Harun is an extremely hardworking programmer and dedicated to the goal he sets (and always raises the bar pretty high). There is no chance that anything will distract him, and his great virtue is the speed of acquiring knowledge, and a sense of where to turn his nose, i.e. what to learn next. In addition, Harun is an outstanding organizer, a born team and project leader, regardless of the industry. Any team that Harun joins will gain a lot in terms of overall value, quality and efficiency.`
+    },
     {
         name : "Ajsela Felic",
         position : "UI/UX designer",

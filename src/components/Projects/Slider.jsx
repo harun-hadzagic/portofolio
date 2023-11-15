@@ -9,6 +9,8 @@ import library from "../../assets/images/library.png"
 import petAdoption from "../../assets/images/pet-adoption.png"
 import videoStream from "../../assets/images/video-streamer.png"
 import hangman from "../../assets/images/hangman.png"
+import meetups from "../../assets/images/meetups.png"
+import challenges from "../../assets/images/challenges.png"
 let data = [
   {
     img: eCommerce,
@@ -44,6 +46,19 @@ let data = [
     disc: "The game we all grew up with, hangman!"
     ,
     title: "Hangman"
+  },
+  {
+    img: meetups,
+    disc: "Add a meetup of find one you would like to join!"
+    ,
+    title: "Event Meetups",
+  },
+  {
+    img: challenges,
+    disc: "Animte your life with challanges and keep track of all of them"
+    ,
+    title: "Challenges",
+    demo: "https://react-animated.vercel.app/"
   }
 ];
 

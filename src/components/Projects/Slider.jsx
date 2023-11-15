@@ -8,8 +8,8 @@ import quiz from "../../assets/images/quiz.png"
 import library from "../../assets/images/library.png"
 import petAdoption from "../../assets/images/pet-adoption.png"
 import videoStream from "../../assets/images/video-streamer.png"
-import hangman from "../../assets/images/hangman.jpg"
-import meetups from "../../assets/images/meetups.png"
+import hangman from "../../assets/images/hangman.png"
+import meetups from "../../assets/images/meetups.jpg"
 import challenges from "../../assets/images/challenges.png"
 let data = [
   {

@@ -4,12 +4,16 @@ import styled from 'styled-components'
 import ClientSlider from './ClientSlider';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { Slide } from 'react-awesome-reveal';
+import SA from "../../assets/images/SA.jpeg"
+import AO from "../../assets/images/AO.jpeg"
+import SC from "../../assets/images/SC.jpeg"
+import AF from "../../assets/images/AF.jpeg"
 
 let clients = [
     {
         name : "Samir Arapcic",
         position : "web developer | coding mentor",
-        img_url : "https://media.licdn.com/dms/image/C5603AQHj3G2ChOSI0A/profile-displayphoto-shrink_800_800/0/1517503652562?e=1700092800&v=beta&t=rtqBOnyWR_EAcYeIYJjJkPnJjzSBUPswG29kzKO5b-4",
+        img_url : SA,
         stars : 5,
         link: "https://www.linkedin.com/in/samir-arapcic-05964470/",
         disc : `Harun's unwavering positivity, unyielding optimism, strong work ethic, and 'can-do' attitude showcase a remarkable level of maturity and an insatiable intellectual curiosity. His assignments consistently exhibit exceptional quality, and his ability to tackle challenges with a smile and unwavering determination is truly commendable.`
@@ -17,7 +21,7 @@ let clients = [
     {
         name : "Amila Omanovic",
         position : "project manager",
-        img_url : "https://media.licdn.com/dms/image/D4D03AQHaU7FLiKUM1Q/profile-displayphoto-shrink_800_800/0/1677084475547?e=1700092800&v=beta&t=xwiYQFC5GUlPqMzMFQY4RE7-f1MCGxIV-S7bdUOPtIo",
+        img_url : AO,
         stars : 5,
         link: "https://www.linkedin.com/in/amila-omanovi%C4%87-a9764311a/",
         disc : `Harun is a committed team member and one of key drivers of our high client satisfaction scores. He sets very ambitious goals for himself and what’s impressive is that he manages to meet them all. I appreciate that I can always count on him to treat all his tasks with importance. That’s what makes him a reliable team member. Furthermore, he’s an excellent communicator and keeps me up to date on his progress, ensuring we’re always on the same page. He often shows initiative, has a great eye for detail and consistently produces high work quality. `
@@ -25,7 +29,7 @@ let clients = [
     {
         name : "Sulejman Catibusic",
         position : "a programmer at heart",
-        img_url : "https://media.licdn.com/dms/image/C5603AQEUAEK7XunMpg/profile-displayphoto-shrink_800_800/0/1517532784158?e=1700092800&v=beta&t=yUSYXzvpuLlura-IYrPo4RHQ7Vw7G8c-MAIeEIENRV0",
+        img_url : SC,
         stars : 5,
         link:"https://www.linkedin.com/in/sulejman-catibusic-2991354a/",
         disc : `Harun is an extremely hardworking programmer and dedicated to the goal he sets (and always raises the bar pretty high). There is no chance that anything will distract him, and his great virtue is the speed of acquiring knowledge, and a sense of where to turn his nose, i.e. what to learn next. In addition, Harun is an outstanding organizer, a born team and project leader, regardless of the industry. Any team that Harun joins will gain a lot in terms of overall value, quality and efficiency.`
@@ -33,7 +37,7 @@ let clients = [
     {
         name : "Ajsela Felic",
         position : "UI/UX designer",
-        img_url : "https://media.licdn.com/dms/image/D4D03AQHhYoFKVRpobw/profile-displayphoto-shrink_800_800/0/1676295363862?e=1700092800&v=beta&t=BAKiC66cpq4p-IJKBaIHL5WznKg4lSWYL21jOO6D8_0",
+        img_url : AF,
         stars : 5,
         link: "https://www.linkedin.com/in/ajselafelic/",
         disc : `Harun is extremely nice to work with. He is friendly and social at work. He is detailed at his task, and is dedicated to everything he is working on.`

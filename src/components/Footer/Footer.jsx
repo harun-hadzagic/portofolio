@@ -5,7 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { AiFillGithub, AiFillLinkedin, AiOutlineArrowUp, AiOutlineInstagram } from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
-import { FiMail, FiPhoneCall } from "react-icons/fi";
+import { FiMail } from "react-icons/fi";
 import { Slide, Zoom, Fade } from "react-awesome-reveal";
 import emailjs from '@emailjs/browser';
 import { ToastContainer, toast } from "react-toastify";

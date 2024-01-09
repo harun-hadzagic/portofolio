@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { AiFillGithub, AiOutlineInstagram } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
 import { Slide } from "react-awesome-reveal";
+import HarunHadzagic from "../../assets/images/HH.jpeg"
 
 const ProfComponent = () => {
 
@@ -57,7 +58,7 @@ const ProfComponent = () => {
       <Slide direction="right">
         <Profile>
           <img
-            src="https://media.licdn.com/dms/image/C4E03AQEFTPq-YrjWAw/profile-displayphoto-shrink_800_800/0/1633685554999?e=1702512000&v=beta&t=9F89-km1dfqGY31ljLYEkafTT1bOpt9-Nhab1kP67QY"
+            src={HarunHadzagic}
             alt="profile"
             // style={{borderRadius: "3rem"}}
           />

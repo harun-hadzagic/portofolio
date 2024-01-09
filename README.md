@@ -1,12 +1,10 @@
 
-## Portfolio using React js and styled-components 2023
+## Portfolio
 
-<img src="https://res.cloudinary.com/ghazni/image/upload/v1678467366/portfolio_6_tg19nz.png" alt="banner"/>
 
 ## Demo
-[Demo](https://uxui-profile.netlify.app/)
+[Demo](https://portofolio-55ta.onrender.com/)
 
-[Tutorial Video Link](https://youtu.be/xbyoqfwCFE8)
 
 ## Features
 

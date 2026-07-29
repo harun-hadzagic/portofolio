@@ -1,142 +1,214 @@
-import React, { useState } from 'react'
-import styled from 'styled-components';
-import { GiCandleFlame } from "react-icons/gi";
+import React, { useState } from "react";
+import styled from "styled-components";
+
+const NAV_LINKS = [
+  { href: "#home", label: "Home" },
+  { href: "#service", label: "Services" },
+  { href: "#project", label: "Projects" },
+  { href: "#client", label: "Testimonials" },
+  { href: "#footer", label: "Contact" },
+];
 
 const Header = () => {
-    const [bar, setBar] = useState(false);
+  const [bar, setBar] = useState(false);
+
+  const closeMenu = () => setBar(false);
+
   return (
     <Container bar={bar}>
-        <Logo>
-            <span className='green'><GiCandleFlame/></span>
-            <h1>Welcome To My Portfolio</h1>
-        </Logo>
-        <Nav bar={bar} onClick={()=>setBar(false)}>
-            <span><a href="#home">Home</a></span>
-            <span><a href="#service">Services</a></span>
-            <span><a href="#project">Projects</a></span>
-            <span><a href="#client">Testimonials</a></span>
-            <span><a href="#footer">Portfolio</a></span>
-        </Nav>
-        <div
-        onClick={() => setBar(!bar)}
-        className="bars">
-            <div className="bar"></div>
-        </div>
+      <Logo href="#home">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="logoGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#8052ff" />
+              <stop offset="100%" stopColor="#15846e" />
+            </linearGradient>
+          </defs>
+          <path d="M12 1 L23 22 L1 22 Z" fill="url(#logoGradient)" />
+        </svg>
+        <span>Harun</span>
+      </Logo>
+
+      <Nav bar={bar}>
+        {NAV_LINKS.map((link) => (
+          <a key={link.href} href={link.href} onClick={closeMenu}>
+            {link.label}
+          </a>
+        ))}
+        <MobileCta href="#footer" onClick={closeMenu}>
+          Let&rsquo;s talk
+        </MobileCta>
+      </Nav>
+
+      <Actions>
+        <CtaButton href="#footer">Let&rsquo;s talk</CtaButton>
+        <Bars onClick={() => setBar(!bar)} bar={bar} aria-label="Toggle menu">
+          <span />
+        </Bars>
+      </Actions>
     </Container>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
 
-const Container = styled.div`
+const Container = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--page-max-width);
+  width: 86%;
+  margin: 0 auto;
+  padding: var(--spacing-36) 0;
+  position: relative;
+  z-index: 20;
+  animation: header 500ms ease-in-out;
+
+  @media (max-width: 840px) {
+    width: 90%;
+  }
+`;
+
+const Logo = styled.a`
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  text-decoration: none;
+
+  span {
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: -0.4px;
+    color: var(--color-bone-white);
+  }
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-36);
+
+  a {
+    color: var(--color-ash-gray);
+    text-decoration: none;
+    font-size: var(--text-nav-label);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    transition: color 250ms ease-in-out;
+
+    :hover {
+      color: var(--color-bone-white);
+    }
+  }
+
+  @media (max-width: 840px) {
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-void);
+    gap: var(--spacing-36);
+    height: ${(p) => (p.bar ? "100vh" : 0)};
+    overflow: hidden;
+    transition: height 400ms ease-in-out;
+    z-index: 15;
+
+    a {
+      font-size: var(--text-heading-2xs);
+      color: var(--color-bone-white);
+    }
+  }
+`;
+
+const MobileCta = styled.a`
+  display: none;
+  @media (max-width: 840px) {
+    display: inline-flex;
+    margin-top: var(--spacing-18);
+    background: var(--color-electric-iris);
+    color: var(--color-bone-white) !important;
+    padding: 14.4px 24px;
+    border-radius: var(--radius-buttons);
+    font-size: var(--text-nav-label) !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    text-decoration: none;
+  }
+`;
+
+const Actions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-24);
+`;
+
+const CtaButton = styled.a`
+  background-color: var(--color-electric-iris);
+  color: var(--color-bone-white);
+  text-decoration: none;
+  padding: 14.4px 22px;
+  border-radius: var(--radius-buttons);
+  font-size: var(--text-nav-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  transition: filter 250ms ease-in-out, transform 250ms ease-in-out;
+  white-space: nowrap;
+
+  :hover {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 840px) {
+    display: none;
+  }
+`;
+
+const Bars = styled.button`
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  @media (max-width: 840px) {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-width: 1280px;
-    width: 80%;
-    margin: 0 auto;
-    padding: 1.5rem 0;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
     position: relative;
-    animation: header 500ms ease-in-out;
-    @media(max-width: 840px){
-        width: 90%;
-    }
-    .bars{
-        display: none;
-    }
-    @media(max-width:640px){
-        .bars{
-            width: 40px;
-            height: 40px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.5rem;
-            z-index: 100;
-            .bar{
-                position: absolute;
-                width: 100%;
-                height: 2px;
-                background-color: ${props => props.bar ? "transparent" : "#fff"};
-                transition: all 400ms ease-in-out;
-                :before, :after{
-                    content: "";
-                    width: 100%;
-                    height: 2px;
-                    background-color: #fff;
-                    position: absolute;
-                }
+    z-index: 20;
 
-                :before{
-                    transform: ${props => props.bar ? "rotate(45deg)" : "translateY(10px)"};
-                    transition: all 400ms ease-in-out;
-                }
+    span {
+      position: relative;
+      width: 22px;
+      height: 2px;
+      background-color: ${(p) => (p.bar ? "transparent" : "#fff")};
+      transition: all 300ms ease-in-out;
 
-                :after{
-                    transform: ${props => props.bar ? "rotate(-45deg)" : "translateY(-10px)"};
-                    transition: all 400ms ease-in-out;
-                }
-            }
-        }
-    }
-`
-const Logo = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    span{
-        font-size: 1.8rem;
-    }
+      ::before,
+      ::after {
+        content: "";
+        position: absolute;
+        width: 22px;
+        height: 2px;
+        background-color: #fff;
+        left: 0;
+      }
 
-    h1{
-        font-weight: 600;
-        font-size: 1.2rem;
+      ::before {
+        transform: ${(p) => (p.bar ? "rotate(45deg)" : "translateY(-7px)")};
+        transition: all 300ms ease-in-out;
+      }
+
+      ::after {
+        transform: ${(p) => (p.bar ? "rotate(-45deg)" : "translateY(7px)")};
+        transition: all 300ms ease-in-out;
+      }
     }
-`
-const Nav = styled.div`
-    @media(max-width:640px){
-        position: fixed;
-        display: flex;
-        flex-direction: column;
-        background-color: #01be96;
-        inset: 0;
-        justify-content: center;
-        align-items: center;
-        font-size: 2rem;
-        gap: 2rem;
-        font-weight: 700;
-        height: ${props => props.bar ? "100vh" : 0};
-        transition: height 400ms ease-in-out;
-        overflow: hidden;
-        z-index: 100;
-    }
-    span{
-        margin-left: 1rem;
-        a{
-            color: #fff;
-            text-decoration: none;
-            font-weight: 400;
-            position: relative;
-            :before{
-                content: "";
-                position: absolute;
-                left: 0;
-                right: 0;
-                bottom: -5px;
-                height: 2px;
-                background-color: #fff;
-                transform: scale(0);
-                transform-origin: right;
-                transition: transform 400ms ease-in-out;
-            }
-            :hover:before{
-                transform: scale(1);
-                transform-origin: left;
-            }
-            :hover{
-                opacity: 0.7;
-            }
-        }
-    }
-`
+  }
+`;

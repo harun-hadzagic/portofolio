@@ -1,15 +1,22 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { MdAlternateEmail } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { HiOutlineMailOpen } from "react-icons/hi";
-import { AiFillGithub, AiFillLinkedin, AiOutlineArrowUp, AiOutlineInstagram } from "react-icons/ai";
+import {
+  AiFillGithub,
+  AiFillLinkedin,
+  AiOutlineArrowUp,
+  AiOutlineInstagram,
+} from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
 import { FiMail } from "react-icons/fi";
-import { Slide, Zoom, Fade } from "react-awesome-reveal";
-import emailjs from '@emailjs/browser';
+import { Fade } from "react-awesome-reveal";
+import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import HarunHadzagic from "../../assets/images/HH.jpeg";
+
 const Footer = () => {
   const scrollUp = () => {
     window.scroll({
@@ -17,30 +24,40 @@ const Footer = () => {
       behavior: "smooth",
     });
   };
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-    error: ""
-  })
-  const handleChange = (name) => (event) =>{
+    error: "",
+  });
+  const handleChange = (name) => (event) => {
     setFormData({ ...formData, [name]: event.target.value });
-  }
-  const sendEmail = (e)=>{
+  };
+  const sendEmail = (e) => {
     e.preventDefault();
-    if(formData.name.length ===0) return setFormData({...formData, error: "Please enter your name"})
-    if(formData.email.length ===0) return setFormData({...formData, error: "Please enter your email"})
-    if(formData.message.length ===0) return setFormData({...formData, error: "Please enter your message"})
-    setLoader(true)
-    emailjs.sendForm('service_t8dni6r', 'template_2sa8xqd', document.querySelector("form"), 'ac8Lt9gkcjvry3bRl')
-      .then((result) => {
+    if (formData.name.length === 0)
+      return setFormData({ ...formData, error: "Please enter your name" });
+    if (formData.email.length === 0)
+      return setFormData({ ...formData, error: "Please enter your email" });
+    if (formData.message.length === 0)
+      return setFormData({ ...formData, error: "Please enter your message" });
+    setLoader(true);
+    emailjs
+      .sendForm(
+        "service_t8dni6r",
+        "template_2sa8xqd",
+        document.querySelector("form"),
+        "ac8Lt9gkcjvry3bRl"
+      )
+      .then(
+        () => {
           setFormData({
             name: "",
             email: "",
             message: "",
-            error: ""
-          })
+            error: "",
+          });
           toast.dark("Message sent!", {
             position: "top-center",
             autoClose: 2000,
@@ -50,131 +67,139 @@ const Footer = () => {
             draggable: true,
             progress: undefined,
           });
-    setLoader(false)
-          
-      }, (error) => {
-        toast.dark("Whoops, something wnt wrong..", {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-          setLoader(false)
-
-      });
-  }
+          setLoader(false);
+        },
+        () => {
+          toast.dark("Whoops, something went wrong..", {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setLoader(false);
+        }
+      );
+  };
   return (
     <Container id="footer">
-      <ToastContainer></ToastContainer>
+      <ToastContainer />
       <Profile>
-        <Slide direction="left" delay={1}>
-          <h1>Portfolio</h1>
-        </Slide>
-        <div className="address">
-          <Slide direction="left">
-            <h1>Location:</h1>
-          </Slide>
-          <Slide direction="left">
-            <p>Bosnia and Herzegovina,<br/> 71000 Sarajevo</p>
-          </Slide>
-        </div>
-        <div className="links">
-          <Slide direction="left">
-            <h1>Contact me directly:</h1>
-          </Slide>
-          {/* <div>
-            <span>
-              <FiPhoneCall />
-            </span>
-            <Slide direction="left">
-              <a href="tel:+38761531086">+387 61 531 086</a>
-            </Slide>
-          </div> */}
-          <div>
-            <Slide direction="left">
+        <Fade direction="up" triggerOnce>
+          <Identity>
+            <img src={HarunHadzagic} alt="Harun Hadzagic" />
+            <div>
+              <Eyebrow>Let&rsquo;s talk</Eyebrow>
+              <h2>Ready when you are.</h2>
+            </div>
+          </Identity>
+        </Fade>
+
+        <Fade direction="up" triggerOnce>
+          <Block>
+            <h4>Location</h4>
+            <p>
+              Bosnia and Herzegovina,
+              <br /> 71000 Sarajevo
+            </p>
+          </Block>
+        </Fade>
+
+        <Fade direction="up" triggerOnce>
+          <Block>
+            <h4>Contact me directly</h4>
+            <div className="row">
               <span>
                 <HiOutlineMailOpen />
               </span>
-            </Slide>
-            <Slide>
               <a href="mailto:harun.hadzagic@gmail.com">harun.hadzagic@gmail.com</a>
-            </Slide>
-          </div>
-        </div>
-        <div className="profiles">
-          <Slide direction="left">
-            <h1>Check my profiles</h1>
-          </Slide>
-          <div className="icons">
-            <Zoom>
-              <span>
-                <a href="https://github.com/harun-hadzagic" target="blank">
-                  <AiFillGithub />
-                </a>
-              </span>
-            </Zoom>
-            <Zoom>
-              <span>
-                <a href="https://www.linkedin.com/in/harun-h-437807136/" target="blank">
-                  <AiFillLinkedin />
-                </a>
-              </span>
-            </Zoom>
-            <Zoom>
-              <span>
-                <a href="https://www.facebook.com/harun.hadzagic/" target="blank">
-                  <BsFacebook />
-                </a>
-              </span>
-            </Zoom>
-            <Zoom>
-              <span>
-                <a href="https://www.instagram.com/harun.hadzagic/" target="blank">
-                  <AiOutlineInstagram />
-                </a>
-              </span>
-            </Zoom>
-          </div>
-        </div>
-        <Fade>
-          <ArrowUp onClick={scrollUp}>
-            <AiOutlineArrowUp />
-          </ArrowUp>
+            </div>
+          </Block>
         </Fade>
+
+        <Fade direction="up" triggerOnce>
+          <Block>
+            <h4>Check my profiles</h4>
+            <div className="icons">
+              <a href="https://github.com/harun-hadzagic" target="_blank" rel="noreferrer" aria-label="GitHub">
+                <AiFillGithub />
+              </a>
+              <a href="https://www.linkedin.com/in/harun-h-437807136/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                <AiFillLinkedin />
+              </a>
+              <a href="https://www.facebook.com/harun.hadzagic/" target="_blank" rel="noreferrer" aria-label="Facebook">
+                <BsFacebook />
+              </a>
+              <a href="https://www.instagram.com/harun.hadzagic/" target="_blank" rel="noreferrer" aria-label="Instagram">
+                <AiOutlineInstagram />
+              </a>
+            </div>
+          </Block>
+        </Fade>
+
+        <ArrowUp onClick={scrollUp} aria-label="Back to top">
+          <AiOutlineArrowUp />
+        </ArrowUp>
       </Profile>
+
       <Form>
-        <Slide direction="right">
+        <Fade direction="up" triggerOnce>
           <form onSubmit={sendEmail}>
-            <div className="name">
+            <Field>
               <span>
                 <CgProfile />
               </span>
-              <input type="text" placeholder="Fullname..." name="user_name" value={formData.name} onChange={handleChange("name")}/>
-            </div>
-            <div className="email">
+              <input
+                type="text"
+                placeholder="Full name..."
+                name="user_name"
+                value={formData.name}
+                onChange={handleChange("name")}
+              />
+            </Field>
+            <Field>
               <span>
                 <MdAlternateEmail />
               </span>
-              <input type="email" placeholder="Email..." name="user_email"value={formData.email}onChange={handleChange("email")}/>
-            </div>
-            <div className="message">
-              <span className="messageIcon">
+              <input
+                type="email"
+                placeholder="Email..."
+                name="user_email"
+                value={formData.email}
+                onChange={handleChange("email")}
+              />
+            </Field>
+            <Field className="message">
+              <span>
                 <FiMail />
               </span>
-              <textarea cols="30" rows="10" placeholder="Message..." name="message"value={formData.message}onChange={handleChange("message")}></textarea>
-            </div>
-            {formData.error && <div className="error">
-              <span>
-                {formData.error}
-              </span>
-            </div>}
-<div style={{display: "flex", justifyContent: "right", alignItems: "center"}}>
-            {loader ? <div className="loader"></div> : <button type="submit" style={{color: "white"}} value="Send">Submit</button>}
-            </div>         </form>
-        </Slide>
+              <textarea
+                cols="30"
+                rows="6"
+                placeholder="Message..."
+                name="message"
+                value={formData.message}
+                onChange={handleChange("message")}
+              />
+            </Field>
+            {formData.error && (
+              <div className="error">
+                <span>{formData.error}</span>
+              </div>
+            )}
+            <SubmitRow>
+              {loader ? (
+                <div className="loader" />
+              ) : (
+                <SubmitButton type="submit" value="Send">
+                  Submit
+                </SubmitButton>
+              )}
+            </SubmitRow>
+          </form>
+        </Fade>
       </Form>
     </Container>
   );
@@ -183,159 +208,221 @@ const Footer = () => {
 export default Footer;
 
 const Container = styled.div`
-  margin-top: 2rem;
   position: relative;
-  padding: 2rem 0;
-  width: 80%;
-  max-width: 1280px;
+  padding: var(--spacing-120) 0 var(--spacing-96);
+  width: 86%;
+  max-width: var(--page-max-width);
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  gap: var(--spacing-96);
+
   @media (max-width: 840px) {
     width: 90%;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 700px) {
     flex-direction: column;
-    gap: 3rem;
+    gap: var(--spacing-60);
   }
 `;
+
 const Profile = styled.div`
   flex: 1;
-  .address {
-    padding: 1rem 0;
-    h1 {
-      font-size: 1.2rem;
+  min-width: 0;
+`;
+
+const Identity = styled.div`
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-18);
+  margin-bottom: var(--spacing-60);
+
+  img {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-cards);
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-size: var(--text-heading-sm);
+    font-weight: 400;
+    letter-spacing: -1px;
+    color: var(--color-bone-white);
+  }
+`;
+
+const Eyebrow = styled.p`
+  color: var(--color-saffron-spark);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.35px;
+  margin-bottom: var(--spacing-6);
+`;
+
+const Block = styled.div`
+  padding-bottom: var(--spacing-30);
+
+  h4 {
+    font-size: var(--text-nav-label);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    color: var(--color-ash-gray);
+    margin-bottom: var(--spacing-12);
+  }
+
+  p {
+    font-size: var(--text-body);
+    font-weight: 200;
+    color: var(--color-silver-mist);
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-12);
+
+    span {
+      color: var(--color-electric-iris);
+      display: flex;
+      font-size: 1.1rem;
     }
 
-    p {
-      width: 60%;
-      padding-top: 0.5rem;
-      @media (max-width: 650px) {
-        width: 100%;
+    a {
+      text-decoration: none;
+      color: var(--color-bone-white);
+      font-weight: 200;
+      font-size: var(--text-body);
+
+      :hover {
+        color: var(--color-saffron-spark);
       }
     }
   }
 
-  .links {
-    h1 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
+  .icons {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-18);
 
-    div {
+    a {
+      color: var(--color-ash-gray);
+      font-size: 1.3rem;
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      a {
-        text-decoration: none;
-        color: lightgray;
-        :hover {
-          color: orange;
-        }
-      }
-    }
-  }
+      transition: color 250ms ease-in-out, transform 250ms ease-in-out;
 
-  .profiles {
-    h1 {
-      font-size: 1.2rem;
-      padding: 1rem 0;
-    }
-
-    .icons {
-      display: flex;
-      align-items: center;
-
-      span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #000;
-        width: 2rem;
-        height: 2rem;
-        margin-right: 0.5rem;
-        border-radius: 50px;
-
-        :hover {
-          background-color: orange;
-        }
-
-        a {
-          margin-top: 0.2rem;
-          color: #fff;
-        }
+      :hover {
+        color: var(--color-electric-iris);
+        transform: translateY(-2px);
       }
     }
   }
 `;
-const ArrowUp = styled.div`
-  width: 2rem;
-  height: 2rem;
-  background-color: #01be96;
+
+const ArrowUp = styled.button`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  color: var(--color-bone-white);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-top: 2rem;
-  @media (max-width: 650px) {
-    position: absolute;
-    right: 3rem;
-    top: 16rem;
+  font-size: 1.1rem;
+  margin-top: var(--spacing-24);
+  transition: border-color 250ms ease-in-out, color 250ms ease-in-out;
+
+  :hover {
+    border-color: var(--color-electric-iris);
+    color: var(--color-electric-iris);
   }
 `;
+
 const Form = styled.div`
   flex: 1;
-  h1 {
-    font-size: 1.3rem;
-    padding-bottom: 0.7rem;
-  }
+  min-width: 0;
 
   form {
-    background-color: #191923;
-    padding: 0.8rem;
-    border-radius: 5px;
-    .name,
-    .email,
-    .message {
-      display: flex;
-      border: 1px solid gray;
-      margin-bottom: 0.5rem;
-      input,
-      textarea {
-        width: 100%;
-        border: none;
-        outline: none;
-        color: #fff;
-        background-color: transparent;
-        padding: 1rem 0.5rem;
-      }
-      span {
-        background-color: #3e3e3e;
-        width: 3rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .messageIcon {
-        align-items: flex-start;
-        padding-top: 0.5rem;
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-24);
+  }
+`;
 
-    button {
-      width: 5rem;
-      height: 1.8rem;
-      background-color: #01be96;
-      border: none;
-      border-radius: 5px;
-      filter: drop-shadow(0px 4px 5px #01be9551);
-      cursor: pointer;
-      :hover {
-        filter: drop-shadow(0px 6px 9px #01be9551);
-      }
-    }
+const Field = styled.div`
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  padding-bottom: var(--spacing-12);
+  transition: border-color 250ms ease-in-out;
+
+  &.message {
+    align-items: flex-start;
+  }
+
+  span {
+    color: var(--color-ash-gray);
+    display: flex;
+    padding-top: 2px;
+  }
+
+  &.message span {
+    padding-top: 4px;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    color: var(--color-bone-white);
+    background-color: transparent;
+    font-size: var(--text-body);
+    font-weight: 200;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-ash-gray);
+  }
+
+  :focus-within {
+    border-color: var(--color-electric-iris);
+  }
+
+  :focus-within span {
+    color: var(--color-electric-iris);
+  }
+`;
+
+const SubmitRow = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const SubmitButton = styled.button`
+  background-color: var(--color-electric-iris);
+  color: var(--color-bone-white);
+  border: none;
+  padding: 14.4px 24px;
+  border-radius: var(--radius-buttons);
+  font-size: var(--text-nav-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  cursor: pointer;
+  transition: filter 250ms ease-in-out, transform 250ms ease-in-out;
+
+  :hover {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
   }
 `;

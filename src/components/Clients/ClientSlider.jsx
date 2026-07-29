@@ -1,93 +1,100 @@
-import React from 'react'
-import styled from 'styled-components'
-import {IoIosQuote} from "react-icons/io";
-import {AiFillStar} from "react-icons/ai";
+import React from "react";
+import styled from "styled-components";
+import { IoIosQuote } from "react-icons/io";
+import { AiFillStar } from "react-icons/ai";
 
-const ClientSlider = (props) => {
-    const {name, position, img_url, stars, disc, link} = props.item;
-    const navigateToPerson = ()=>{
-        window.open(link)
-    }
+const ClientSlider = ({ item }) => {
+  const { name, position, img_url, stars, disc, link } = item;
+
   return (
     <Container>
-        <Header>
-            <span className='quote'><IoIosQuote/></span>
-            <div>
-                {Array(stars).fill().map((_, i) => (
-                    <span className='star' key={i}>
-                        <AiFillStar/>
-                    </span>
-                ))}
-            </div>
-        </Header>
-        <Body>
-            {disc}
-        </Body>
-        <Footer style={{cursor: "pointer"}} onClick={navigateToPerson}>
-            <img src={img_url} alt={name} />
-            <div className="details">
-                <h1>{name}</h1>
-                <p>{position}</p>
-            </div>
-        </Footer>
+      <Quote>
+        <IoIosQuote />
+      </Quote>
+      <Stars>
+        {Array(stars)
+          .fill()
+          .map((_, i) => (
+            <AiFillStar key={i} />
+          ))}
+      </Stars>
+      <Body>{disc}</Body>
+      <Person href={link} target="_blank" rel="noreferrer">
+        <img src={img_url} alt={name} />
+        <div>
+          <h4>{name}</h4>
+          <p>{position}</p>
+        </div>
+      </Person>
     </Container>
-  )
-}
+  );
+};
 
-export default ClientSlider
+export default ClientSlider;
 
 const Container = styled.div`
-    background: linear-gradient(159deg, rgb(45, 45, 58) 0%, rgb(43, 43, 53) 100%);
-    padding: 1.5rem 1rem;
-    margin: 0 1rem;
-`
+  width: 380px;
+  display: flex;
+  flex-direction: column;
 
-const Header = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .quote{
-        font-size: 3rem;
-        color: #01be96;
-        opacity: 0.7;
-    }
+  @media (max-width: 990px) {
+    width: 320px;
+  }
 
-    .star{
-        color: #ffcd3c;
-        font-size: 1.3rem;
-    }
-`
+  @media (max-width: 600px) {
+    width: 280px;
+  }
+`;
+
+const Quote = styled.span`
+  font-size: 2.5rem;
+  color: var(--color-electric-iris);
+  opacity: 0.6;
+  line-height: 1;
+`;
+
+const Stars = styled.div`
+  display: flex;
+  gap: 2px;
+  margin-top: var(--spacing-12);
+  color: var(--color-saffron-spark);
+  font-size: 1rem;
+`;
+
 const Body = styled.p`
-    font-size: 0.8rem;
-    margin-bottom: 1.5rem;
-`
-const Footer = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    img{
-        width: 4rem;
-        height: 4rem;
-        border-radius: 50px;
-        object-fit: cover;
-    }
+  margin-top: var(--spacing-18);
+  font-size: var(--text-body);
+  font-weight: 200;
+  line-height: 1.5;
+  color: var(--color-silver-mist);
+  flex: 1;
+`;
 
-    h1{
-        font-size: 1.2rem;
-        font-weight: 700;
-        @media(max-width: 580px){
-            font-size: 1rem;
-        }
-        @media(max-width: 538px){
-            font-size: 0.9rem;
-        }
-    }
+const Person = styled.a`
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  margin-top: var(--spacing-24);
+  text-decoration: none;
+  cursor: pointer;
 
-    p{
-        font-size: 0.8rem;
-        color: rgba(255,255,255,0.500);
-        @media(max-width: 538px){
-            font-size: 0.6rem;
-        }
-    }
-`
+  img {
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: var(--radius-cards);
+    object-fit: cover;
+  }
+
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-bone-white);
+  }
+
+  p {
+    font-size: 13px;
+    color: var(--color-ash-gray);
+    margin-top: 2px;
+    text-transform: capitalize;
+  }
+`;

@@ -1,67 +1,93 @@
-import React from 'react'
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import { HiOutlineExternalLink } from "react-icons/hi";
 
-const Project = (props) => {
-    const { img, disc, title, demo } = props.item;
+const Project = ({ item }) => {
+  const { img, disc, title, demo } = item;
   return (
-    <Container className='project'>
-        <img src={img} alt="project" />
-        <div className="disc">
-            <h1>{title}</h1>
-            <p>{disc}
-            {demo && <a href={demo}>demo</a>}
-            </p>
-        </div>
+    <Container>
+      <ImageWrap>
+        <img src={img} alt={title} loading="lazy" />
+      </ImageWrap>
+      <Title>{title}</Title>
+      <Disc>{disc}</Disc>
+      {demo && (
+        <Demo href={demo} target="_blank" rel="noreferrer">
+          View demo <HiOutlineExternalLink />
+        </Demo>
+      )}
     </Container>
-  )
-}
+  );
+};
 
 export default Project;
 
 const Container = styled.div`
-    height: 10rem;
-    background-color: #4e5156;
-    margin: 0 0.5rem;
-    padding: 0.5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    img{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 400ms ease-in-out;
-    }
-    .disc{
-        position: absolute;
-        right: 0;
-        left: 0;
-        bottom: -10rem;
-        text-align: left;
-        padding: 0.5rem;
-        background: linear-gradient(rgba(0,0,0, 0.100), rgba(0,0,0, 0.80));
-        transition: all 400ms ease-in-out;
-        h1{
-            font-size: 1rem;
-        }
-    
-        p{
-            width: 90%;
-            font-size: 0.8rem;
-            a{
-                margin-left: 0.4rem;
-                color: red;
-            }
-        }
-    }
+  width: 340px;
 
-    :hover > img{
-        transform: scale(1.3);
-    }
+  @media (max-width: 990px) {
+    width: 300px;
+  }
 
-    :hover > .disc{
-        bottom: 0;
-    }
+  @media (max-width: 600px) {
+    width: 260px;
+  }
+`;
 
-`
+const ImageWrap = styled.div`
+  border-radius: var(--radius-cards);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background-color: #0a0a0a;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 400ms ease-in-out, filter 400ms ease-in-out;
+  }
+
+  transition: box-shadow 400ms ease-in-out;
+
+  ${Container}:hover & {
+    box-shadow: 0 0 0 2px var(--color-electric-iris);
+  }
+
+  ${Container}:hover & img {
+    transform: scale(1.05);
+  }
+`;
+
+const Title = styled.h3`
+  margin-top: var(--spacing-24);
+  font-size: var(--text-heading-xs);
+  font-weight: 400;
+  color: var(--color-bone-white);
+`;
+
+const Disc = styled.p`
+  margin-top: var(--spacing-6);
+  font-size: 15px;
+  font-weight: 200;
+  line-height: 1.5;
+  color: var(--color-silver-mist);
+`;
+
+const Demo = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--spacing-12);
+  color: var(--color-saffron-spark);
+  font-size: var(--text-nav-label);
+  font-weight: 600;
+  text-decoration: none;
+
+  svg {
+    transition: transform 250ms ease-in-out;
+  }
+
+  :hover svg {
+    transform: translate(2px, -2px);
+  }
+`;

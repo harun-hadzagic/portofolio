@@ -1,34 +1,40 @@
-import React from 'react'
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-const Card = (props) => {
-    const { Icon, disc, title } = props;
+const Card = ({ Icon, title, disc }) => {
   return (
     <Container>
-        <span className='green'><Icon/></span>
-        <h1>{title}</h1>
-        <p>{disc}</p>
+      <Icon />
+      <h3>{title}</h3>
+      <p>{disc}</p>
     </Container>
-  )
-}
+  );
+};
 
 export default Card;
 
 const Container = styled.div`
-    width: 100%;
-    background: linear-gradient(159deg, rgb(45, 45, 58) 0%, rgb(43, 43, 53) 100%);
-    padding: 1rem;
-    text-align: center;
-    span{
-        font-size: 4rem;
-    }
-    
-    h1{
-        font-size: 1.2rem;
-        padding-bottom: 1rem;
-    }
+  width: 100%;
 
-    p{
-        font-size: 0.8rem;
-    }
-`
+  svg {
+    font-size: 2.5rem;
+    color: var(--color-electric-iris);
+    margin-bottom: var(--spacing-24);
+  }
+
+  h3 {
+    font-size: var(--text-heading-2xs);
+    font-weight: 400;
+    letter-spacing: -0.48px;
+    color: var(--color-bone-white);
+    margin-bottom: var(--spacing-12);
+  }
+
+  p {
+    font-size: var(--text-body);
+    font-weight: 200;
+    color: var(--color-silver-mist);
+    line-height: 1.5;
+    max-width: 340px;
+  }
+`;

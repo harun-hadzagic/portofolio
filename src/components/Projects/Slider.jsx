@@ -1,154 +1,67 @@
-import React, { useRef, useState } from 'react'
-import Slider from 'react-slick';
-import Project from './Project';
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import styled from 'styled-components';
-import eCommerce from "../../assets/images/e-commerce.png"
-import quiz from "../../assets/images/quiz.png"
-import library from "../../assets/images/library.png"
-import petAdoption from "../../assets/images/pet-adoption.png"
-import videoStream from "../../assets/images/video-streamer.png"
-import hangman from "../../assets/images/hangman.png"
-import meetups from "../../assets/images/meetups.jpg"
-import challenges from "../../assets/images/challenges.png"
-let data = [
+import React from "react";
+import Project from "./Project";
+import Carousel from "../common/Carousel";
+import eCommerce from "../../assets/images/e-commerce.png";
+import quiz from "../../assets/images/quiz.png";
+import library from "../../assets/images/library.png";
+import petAdoption from "../../assets/images/pet-adoption.png";
+import videoStream from "../../assets/images/video-streamer.png";
+import hangman from "../../assets/images/hangman.png";
+import meetups from "../../assets/images/meetups.jpg";
+import challenges from "../../assets/images/challenges.png";
+
+const data = [
   {
     img: eCommerce,
-    disc: "The system allows anyone to become a user and purchase books using their credit card, while a manager has all CRUD capabilities for all books.",
-    title: "Online Book Store"
+    title: "Online Book Store",
+    disc: "A full e-commerce flow where anyone can browse and buy books by card, while a manager gets complete CRUD control over the catalog.",
   },
   {
     img: quiz,
-    disc: "This app was created to allow mentors to create edit and delete quizes that they would like their students to take. The app also allows students to take a quiz and keep track of their results."
-    ,
-    title: "Quiz App"
+    title: "Quiz App",
+    disc: "Lets mentors create, edit and delete quizzes for their students, while students take quizzes and track their results.",
   },
   {
     img: library,
-    disc: "One place to browse books, author and publishers, with one admin who can add, edit, create or remove any one of the three."
-    ,
-    title: "Library"
+    title: "Library",
+    disc: "One place to browse books, authors and publishers, with an admin who can add, edit, or remove any of the three.",
   },
   {
     img: petAdoption,
-    disc: "An app createt during a hackathon and it allowes users to post pets up for adoption along with many more services."
-    ,
-    title: "Pet adoption"
+    title: "Pet Adoption",
+    disc: "Built during a hackathon — lets users post pets up for adoption alongside a suite of supporting services.",
   },
   {
     img: videoStream,
-    disc: "A live streaming platform allowing a streamer to start streaming and a viewer to start viewing the stream."
-    ,
-    title: "Live Stream Platform"
+    title: "Live Stream Platform",
+    disc: "A live streaming platform where a streamer can start broadcasting and viewers can tune in in real time.",
   },
   {
     img: hangman,
-    disc: "The game we all grew up with, hangman!"
-    ,
-    title: "Hangman"
+    title: "Hangman",
+    disc: "The word-guessing game we all grew up with, rebuilt from scratch.",
   },
   {
     img: meetups,
-    disc: "Add a meetup of find one you would like to join!"
-    ,
     title: "Event Meetups",
+    disc: "Post a meetup or find one worth joining — built for organizing communities around shared interests.",
   },
   {
     img: challenges,
-    disc: "Animte your life with challanges and keep track of all of them"
-    ,
     title: "Challenges",
-    demo: "https://react-animated.vercel.app/"
-  }
+    disc: "Animate your life with challenges and keep track of every one of them.",
+    demo: "https://react-animated.vercel.app/",
+  },
 ];
 
-var settings = {
-  className: "center",
-  centerMode: true,
-  dots: false,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  initialSlide: 0,
-  arrows: false,
-  responsive: [
-    {
-      breakpoint: 990,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        infinite: true,
-        dots: false,
-        centerMode: false
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        initialSlide: 2,
-        centerMode: false
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        centerMode: false
-      }
-    }
-  ]
-};
 const SliderComp = () => {
-  const [right, setRight]  = useState(false)
-  const [left, setLeft] = useState(false)
-  const arrowRef = useRef(null);
-  let sliderProject = "";
-  sliderProject = data.map((item, i) => (
-    <Project item={item} key={i} />
-  ))
   return (
-    <Container>
-      <Slider ref={arrowRef} {...settings}>
-        {sliderProject}
-      </Slider>
-      <Buttons>
-        <button
-        style={{backgroundColor: "#fff", opacity: left ? "100%" :" 50%"}} onMouseEnter={()=>setLeft(true)} onMouseLeave={()=>setLeft(false)}
-          onClick={() => arrowRef.current.slickPrev()}
-          className='back'><IoIosArrowBack /></button>
-        <button
-          style={{backgroundColor: "#fff", opacity: right ? "100%" :" 50%"}} onMouseEnter={()=>setRight(true)} onMouseLeave={()=>setRight(false)}
-          onClick={() => arrowRef.current.slickNext()}
-          className='next'><IoIosArrowForward /></button>
-      </Buttons>
-    </Container>
-  )
-}
+    <Carousel ariaLabel="Projects">
+      {data.map((item, i) => (
+        <Project item={item} key={i} />
+      ))}
+    </Carousel>
+  );
+};
 
 export default SliderComp;
-
-const Container = styled.div`
-  position: relative;
-`
-
-const Buttons = styled.div`
-  button{
-    width: 2rem;
-    height: 2rem;
-    background-color: rgba(255, 255, 255, 0.100);
-    cursor: pointer;
-    color: #01be96;
-    border: none;
-    position: absolute;
-    top: 45%;
-    right: -1rem;
-  }
-
-  .back{
-    left: -1rem;
-  }
-`

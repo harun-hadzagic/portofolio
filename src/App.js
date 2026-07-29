@@ -1,3 +1,4 @@
+import { Suspense, lazy } from "react";
 import styled from "styled-components";
 import Header from "./components/Banner/Header";
 import ProfComponent from "./components/Banner/ProfComponent";
@@ -5,37 +6,59 @@ import Clients from "./components/Clients/Clients";
 import Footer from "./components/Footer/Footer";
 import Projects from "./components/Projects/Projects";
 import Services from "./components/Service/Services";
+import ParticleField from "./components/ParticleField/ParticleField";
+import Hero3DBoundary from "./components/Hero3D/Hero3DBoundary";
+import useCanRender3D from "./hooks/useCanRender3D";
+
+const Hero3D = lazy(() => import("./components/Hero3D/Hero3D"));
+
 function App() {
+  const canRender3D = useCanRender3D();
+
   return (
     <Container>
-      <Banner>
+      <Ambient>
+        <ParticleField variant="ambient" />
+      </Ambient>
+      <Content>
         <Header />
-        <ProfComponent />
-      </Banner>
-      <Services />
-      <LightColor>
+        {canRender3D ? (
+          <Hero3DBoundary>
+            <Suspense fallback={<ProfComponent />}>
+              <Hero3D />
+            </Suspense>
+          </Hero3DBoundary>
+        ) : (
+          <ProfComponent />
+        )}
+        <Services />
         <Projects />
-      </LightColor>
-      <Clients />
-      <LightColor>
+        <Clients />
         <Footer />
-      </LightColor>
+      </Content>
     </Container>
   );
 }
 
 export default App;
 
-const Container = styled.div``;
-const Banner = styled.div`
-  background: linear-gradient(159deg, rgb(45, 45, 58) 0%, rgb(43, 43, 53) 100%);
-  height: 100vh;
+const Container = styled.div`
+  position: relative;
+  background-color: var(--color-void);
+`;
+
+const Ambient = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
   @media (max-width: 640px) {
-    height: 100%;
-    padding-bottom: 2rem;
+    display: none;
   }
 `;
 
-const LightColor = styled.div`
-  background: linear-gradient(159deg, rgb(45, 45, 58) 0%, rgb(43, 43, 53) 100%);
+const Content = styled.div`
+  position: relative;
+  z-index: 1;
 `;

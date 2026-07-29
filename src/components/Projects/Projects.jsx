@@ -1,48 +1,65 @@
-import React from 'react'
-import styled from 'styled-components';
-import SliderComp from './Slider';
-import { Zoom } from 'react-awesome-reveal';
+import React from "react";
+import styled from "styled-components";
+import SliderComp from "./Slider";
+import { Fade } from "react-awesome-reveal";
 
 const Projects = () => {
   return (
-    <Container id='project'>
-        <Zoom>
-            <h1>Recent <span className="green">Projects</span></h1>
-            <p>Here, you'll discover a showcase of a small portion of my work, highlighting my passion for coding and problem-solving. Explore the projects that define my journey and feel free to reach out if you want to see a few more.</p>
-        </Zoom>
-        <Slide>
-            <SliderComp/>
-        </Slide>
+    <Container id="project">
+      <Fade direction="up" triggerOnce>
+        <Eyebrow>My work</Eyebrow>
+        <Headline>Recent projects</Headline>
+        <SubBody>
+          A small showcase of the products I&rsquo;ve built — reach out if
+          you&rsquo;d like to see more.
+        </SubBody>
+      </Fade>
+      <SliderWrap>
+        <SliderComp />
+      </SliderWrap>
     </Container>
-  )
-}
+  );
+};
 
 export default Projects;
 
 const Container = styled.div`
-    width: 80%;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 3rem 0;
-    text-align: center;
-    position: relative;
-    @media(max-width: 840px){
-        width: 90%;
-    }
-    h1{
-        font-size: 1.9rem;
-    }
+  width: 86%;
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding-top: var(--spacing-120);
 
-    p{
-        width: 28rem;
-        margin: 0 auto;
-        padding: 1rem 0;
-        font-size: 0.9rem;
-        @media(max-width : 500px){
-            width: 90%;
-        }
-    }
-    
-`
+  @media (max-width: 840px) {
+    width: 90%;
+    padding-top: var(--spacing-96);
+  }
+`;
 
-const Slide = styled.div``
+const Eyebrow = styled.p`
+  color: var(--color-saffron-spark);
+  font-size: var(--text-nav-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.35px;
+  margin-bottom: var(--spacing-18);
+`;
+
+const Headline = styled.h2`
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 400;
+  letter-spacing: -1.68px;
+  color: var(--color-bone-white);
+`;
+
+const SubBody = styled.p`
+  margin-top: var(--spacing-18);
+  max-width: 520px;
+  font-size: var(--text-body);
+  font-weight: 200;
+  color: var(--color-silver-mist);
+  line-height: 1.5;
+`;
+
+const SliderWrap = styled.div`
+  margin-top: var(--spacing-60);
+`;

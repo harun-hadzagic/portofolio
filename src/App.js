@@ -17,23 +17,28 @@ function App() {
 
   return (
     <Container>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <Ambient>
         <ParticleField variant="ambient" />
       </Ambient>
       <Content>
         <Header />
-        {canRender3D ? (
-          <Hero3DBoundary>
-            <Suspense fallback={<ProfComponent />}>
-              <Hero3D />
-            </Suspense>
-          </Hero3DBoundary>
-        ) : (
-          <ProfComponent />
-        )}
-        <Services />
-        <Projects />
-        <Clients />
+        <main id="main">
+          {canRender3D ? (
+            <Hero3DBoundary>
+              <Suspense fallback={<ProfComponent />}>
+                <Hero3D />
+              </Suspense>
+            </Hero3DBoundary>
+          ) : (
+            <ProfComponent />
+          )}
+          <Services />
+          <Projects />
+          <Clients />
+        </main>
         <Footer />
       </Content>
     </Container>

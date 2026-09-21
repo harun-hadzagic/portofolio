@@ -51,9 +51,12 @@ const Clients = () => {
         <Headline>What people say</Headline>
       </Fade>
       <SliderWrap>
-        <Carousel ariaLabel="Testimonials">
-          {clients.map((item, i) => (
-            <ClientSlider item={item} key={i} />
+        <Carousel
+          ariaLabel="Testimonials"
+          labels={clients.map((item) => item.name)}
+        >
+          {clients.map((item) => (
+            <ClientSlider item={item} key={item.name} />
           ))}
         </Carousel>
       </SliderWrap>
@@ -87,7 +90,8 @@ const Eyebrow = styled.p`
 const Headline = styled.h2`
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 400;
-  letter-spacing: -1.68px;
+  letter-spacing: var(--tracking-heading);
+  text-wrap: balance;
   color: var(--color-bone-white);
 `;
 

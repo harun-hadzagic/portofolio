@@ -8,19 +8,27 @@ const ClientSlider = ({ item }) => {
 
   return (
     <Container>
-      <Quote>
+      <Quote aria-hidden="true">
         <IoIosQuote />
       </Quote>
-      <Stars>
+      {/* Five decorative glyphs say nothing to a screen reader; one label does. */}
+      <Stars role="img" aria-label={`Rated ${stars} out of 5`}>
         {Array(stars)
           .fill()
           .map((_, i) => (
-            <AiFillStar key={i} />
+            <AiFillStar key={i} aria-hidden="true" />
           ))}
       </Stars>
       <Body>{disc}</Body>
-      <Person href={link} target="_blank" rel="noreferrer">
-        <img src={img_url} alt={name} />
+      <Person
+        href={link}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`${name}, ${position} — view LinkedIn profile`}
+      >
+        {/* alt="" on purpose: the name sits right beside it, so alt text here
+            would make the link announce the same name twice. */}
+        <img src={img_url} alt="" width="64" height="64" loading="lazy" />
         <div>
           <h4>{name}</h4>
           <p>{position}</p>
@@ -64,8 +72,9 @@ const Stars = styled.div`
 const Body = styled.p`
   margin-top: var(--spacing-18);
   font-size: var(--text-body);
-  font-weight: 200;
-  line-height: 1.5;
+  font-weight: 300;
+  line-height: 1.55;
+  text-wrap: pretty;
   color: var(--color-silver-mist);
   flex: 1;
 `;
@@ -83,12 +92,15 @@ const Person = styled.a`
     height: 3.2rem;
     border-radius: var(--radius-cards);
     object-fit: cover;
+    box-shadow: 0 0 0 0 var(--color-electric-iris);
+    transition: box-shadow 250ms ease-in-out;
   }
 
   h4 {
     font-size: 16px;
     font-weight: 600;
     color: var(--color-bone-white);
+    transition: color 250ms ease-in-out;
   }
 
   p {
@@ -96,5 +108,16 @@ const Person = styled.a`
     color: var(--color-ash-gray);
     margin-top: 2px;
     text-transform: capitalize;
+  }
+
+  /* It was a link with no hover feedback at all — nothing said it was one. */
+  :hover img,
+  :focus-visible img {
+    box-shadow: 0 0 0 2px var(--color-electric-iris);
+  }
+
+  :hover h4,
+  :focus-visible h4 {
+    color: var(--color-saffron-spark);
   }
 `;

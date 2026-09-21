@@ -19,20 +19,20 @@ const HeroIntro = () => {
           target="_blank"
           rel="noreferrer"
         >
-          View my CV →
+          View my CV <span aria-hidden="true">&rarr;</span>
         </GhostLink>
       </CtaRow>
       <SocialRow>
         <span>Find me on</span>
         <div className="icons">
           <a href="https://github.com/harun-hadzagic" target="_blank" rel="noreferrer" aria-label="GitHub">
-            <AiFillGithub />
+            <AiFillGithub aria-hidden="true" />
           </a>
           <a href="https://www.linkedin.com/in/harun-h-437807136/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-            <FaLinkedinIn />
+            <FaLinkedinIn aria-hidden="true" />
           </a>
           <a href="https://www.instagram.com/harun.hadzagic/" target="_blank" rel="noreferrer" aria-label="Instagram">
-            <AiOutlineInstagram />
+            <AiOutlineInstagram aria-hidden="true" />
           </a>
         </div>
       </SocialRow>
@@ -61,15 +61,19 @@ const Headline = styled.h1`
   font-weight: 400;
   font-size: clamp(42px, 7vw, 78px);
   line-height: 1.1;
-  letter-spacing: -0.04em;
+  /* em, not a fixed -0.04em ceiling: the clamp shrinks the size on small
+     screens and proportional tracking shrinks with it. */
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
   margin-bottom: var(--spacing-24);
 `;
 
 const Body = styled.p`
   color: var(--color-silver-mist);
-  font-weight: 200;
+  font-weight: 300;
   font-size: var(--text-body);
-  line-height: 1.5;
+  line-height: 1.55;
+  text-wrap: pretty;
   max-width: 480px;
 `;
 
@@ -100,17 +104,37 @@ const PrimaryButton = styled.a`
 `;
 
 const GhostLink = styled.a`
+  position: relative;
   color: var(--color-bone-white);
   text-decoration: none;
+
+  /* 20px tall on its own — grow the hit area, not the underline. */
+  ::after {
+    content: "";
+    position: absolute;
+    inset: -8px -4px;
+  }
+
   font-size: var(--text-nav-label);
   font-weight: 400;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   padding-bottom: 2px;
   transition: border-color 250ms ease-in-out, color 250ms ease-in-out;
 
-  :hover {
+  span {
+    display: inline-block;
+    transition: transform 250ms ease-in-out;
+  }
+
+  :hover,
+  :focus-visible {
     border-color: var(--color-saffron-spark);
     color: var(--color-saffron-spark);
+  }
+
+  :hover span,
+  :focus-visible span {
+    transform: translateX(3px);
   }
 `;
 
@@ -137,6 +161,16 @@ const SocialRow = styled.div`
       font-size: 1.2rem;
       display: flex;
       transition: color 250ms ease-in-out, transform 250ms ease-in-out;
+
+      /* Expands the tap target to ~37px without moving the icon a pixel;
+         19px glyphs are well under the 24px minimum on touch. */
+      position: relative;
+
+      ::after {
+        content: "";
+        position: absolute;
+        inset: -9px;
+      }
 
       :hover {
         color: var(--color-electric-iris);

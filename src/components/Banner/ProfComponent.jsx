@@ -7,9 +7,13 @@ import HeroIntro from "./HeroIntro";
 const ProfComponent = () => {
   return (
     <Container id="home">
-      <Fade direction="up" triggerOnce cascade damping={0.15}>
-        <HeroIntro />
-      </Fade>
+      {/* Fade renders its own wrapper div, which would otherwise swallow
+          HeroIntro's `flex: 1` and let the canvas take the whole row. */}
+      <TextColumn>
+        <Fade direction="up" triggerOnce>
+          <HeroIntro />
+        </Fade>
+      </TextColumn>
 
       <Visual aria-hidden="true">
         <ParticleField variant="hero" />
@@ -39,6 +43,15 @@ const Container = styled.div`
     min-height: auto;
     padding-top: var(--spacing-24);
     gap: var(--spacing-36);
+  }
+`;
+
+const TextColumn = styled.div`
+  flex: 1;
+  min-width: 0;
+
+  @media (max-width: 900px) {
+    width: 100%;
   }
 `;
 

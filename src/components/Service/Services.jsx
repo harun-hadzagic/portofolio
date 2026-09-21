@@ -75,7 +75,16 @@ const Services = () => {
       <Fade direction="up" triggerOnce>
         <SkillsRow>
           {skillsArray.map((skill) => (
-            <img src={skill.src} key={skill.name} alt={skill.name} title={skill.name} />
+            <img
+              src={skill.src}
+              key={skill.name}
+              alt={skill.name}
+              title={skill.name}
+              width="56"
+              height="42"
+              loading="lazy"
+              decoding="async"
+            />
           ))}
         </SkillsRow>
       </Fade>
@@ -109,7 +118,8 @@ const Eyebrow = styled.p`
 const Headline = styled.h2`
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 400;
-  letter-spacing: -1.68px;
+  letter-spacing: var(--tracking-heading);
+  text-wrap: balance;
   color: var(--color-bone-white);
 `;
 
@@ -123,6 +133,7 @@ const Cards = styled.div`
 const SkillsHeadline = styled.h3`
   font-size: var(--text-subheading);
   font-weight: 400;
+  letter-spacing: var(--tracking-heading);
   color: var(--color-bone-white);
   margin-top: var(--spacing-96);
   margin-bottom: var(--spacing-60);
@@ -139,8 +150,12 @@ const SkillsRow = styled.div`
   gap: var(--spacing-60);
 
   img {
+    /* A fixed box instead of height + width:auto: the logos have wildly
+       different aspect ratios, so this both reserves the space before load
+       (no shift) and gives the row one consistent optical rhythm. */
+    width: 56px;
     height: 42px;
-    width: auto;
+    object-fit: contain;
     filter: grayscale(1);
     opacity: 0.5;
     transition: filter 300ms ease-in-out, opacity 300ms ease-in-out, transform 300ms ease-in-out;
@@ -155,6 +170,7 @@ const SkillsRow = styled.div`
   @media (max-width: 640px) {
     gap: var(--spacing-36);
     img {
+      width: 44px;
       height: 32px;
     }
   }

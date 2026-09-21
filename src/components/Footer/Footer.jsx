@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { MdAlternateEmail } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
@@ -17,79 +17,120 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import HarunHadzagic from "../../assets/images/HH.jpeg";
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const toastOptions = {
+  position: "top-center",
+  autoClose: 2000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+};
+
 const Footer = () => {
+  const formRef = useRef(null);
+  const fieldRefs = {
+    name: useRef(null),
+    email: useRef(null),
+    message: useRef(null),
+  };
+
+  const [loader, setLoader] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [errors, setErrors] = useState({});
+
   const scrollUp = () => {
     window.scroll({
       top: 0,
-      behavior: "smooth",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
     });
   };
-  const [loader, setLoader] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-    error: "",
-  });
+
   const handleChange = (name) => (event) => {
-    setFormData({ ...formData, [name]: event.target.value });
+    const { value } = event.target;
+    setFormData((previous) => ({ ...previous, [name]: value }));
+    // Clear a field's error as soon as the person starts fixing it.
+    setErrors((previous) =>
+      previous[name] ? { ...previous, [name]: undefined } : previous
+    );
   };
+
+  const validate = () => {
+    const next = {};
+    if (!formData.name.trim()) next.name = "Please enter your name.";
+    if (!formData.email.trim()) next.email = "Please enter your email address.";
+    else if (!EMAIL_PATTERN.test(formData.email.trim()))
+      next.email = "That email address doesn't look right — check for a typo.";
+    if (!formData.message.trim()) next.message = "Please enter a message.";
+    return next;
+  };
+
   const sendEmail = (e) => {
     e.preventDefault();
-    if (formData.name.length === 0)
-      return setFormData({ ...formData, error: "Please enter your name" });
-    if (formData.email.length === 0)
-      return setFormData({ ...formData, error: "Please enter your email" });
-    if (formData.message.length === 0)
-      return setFormData({ ...formData, error: "Please enter your message" });
+
+    const nextErrors = validate();
+    setErrors(nextErrors);
+
+    // Send focus to the first problem so keyboard and screen-reader users
+    // land on it instead of hunting for a single message at the bottom.
+    const firstInvalid = ["name", "email", "message"].find((key) => nextErrors[key]);
+    if (firstInvalid) {
+      fieldRefs[firstInvalid].current?.focus();
+      return;
+    }
+
     setLoader(true);
     emailjs
       .sendForm(
         "service_t8dni6r",
         "template_2sa8xqd",
-        document.querySelector("form"),
+        formRef.current,
         "ac8Lt9gkcjvry3bRl"
       )
       .then(
         () => {
-          setFormData({
-            name: "",
-            email: "",
-            message: "",
-            error: "",
-          });
-          toast.dark("Message sent!", {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          setFormData({ name: "", email: "", message: "" });
+          setErrors({});
+          toast.dark("Message sent!", toastOptions);
           setLoader(false);
         },
         () => {
-          toast.dark("Whoops, something went wrong..", {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.dark(
+            "Couldn't send that — please try again, or email me directly.",
+            toastOptions
+          );
           setLoader(false);
         }
       );
   };
+
+  const fieldProps = (key) => ({
+    id: `contact-${key}`,
+    name: key === "message" ? "message" : `user_${key}`,
+    value: formData[key],
+    onChange: handleChange(key),
+    ref: fieldRefs[key],
+    "aria-invalid": errors[key] ? true : undefined,
+    "aria-describedby": errors[key] ? `contact-${key}-error` : undefined,
+  });
+
   return (
     <Container id="footer">
       <ToastContainer />
       <Profile>
         <Fade direction="up" triggerOnce>
           <Identity>
-            <img src={HarunHadzagic} alt="Harun Hadzagic" />
+            <img
+              src={HarunHadzagic}
+              alt="Harun Hadzagic"
+              width="64"
+              height="64"
+              loading="lazy"
+            />
             <div>
               <Eyebrow>Let&rsquo;s talk</Eyebrow>
               <h2>Ready when you are.</h2>
@@ -99,7 +140,7 @@ const Footer = () => {
 
         <Fade direction="up" triggerOnce>
           <Block>
-            <h4>Location</h4>
+            <h3>Location</h3>
             <p>
               Bosnia and Herzegovina,
               <br /> 71000 Sarajevo
@@ -109,10 +150,10 @@ const Footer = () => {
 
         <Fade direction="up" triggerOnce>
           <Block>
-            <h4>Contact me directly</h4>
+            <h3>Contact me directly</h3>
             <div className="row">
               <span>
-                <HiOutlineMailOpen />
+                <HiOutlineMailOpen aria-hidden="true" />
               </span>
               <a href="mailto:harun.hadzagic@gmail.com">harun.hadzagic@gmail.com</a>
             </div>
@@ -121,82 +162,102 @@ const Footer = () => {
 
         <Fade direction="up" triggerOnce>
           <Block>
-            <h4>Check my profiles</h4>
+            <h3>Check my profiles</h3>
             <div className="icons">
               <a href="https://github.com/harun-hadzagic" target="_blank" rel="noreferrer" aria-label="GitHub">
-                <AiFillGithub />
+                <AiFillGithub aria-hidden="true" />
               </a>
               <a href="https://www.linkedin.com/in/harun-h-437807136/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-                <AiFillLinkedin />
+                <AiFillLinkedin aria-hidden="true" />
               </a>
               <a href="https://www.facebook.com/harun.hadzagic/" target="_blank" rel="noreferrer" aria-label="Facebook">
-                <BsFacebook />
+                <BsFacebook aria-hidden="true" />
               </a>
               <a href="https://www.instagram.com/harun.hadzagic/" target="_blank" rel="noreferrer" aria-label="Instagram">
-                <AiOutlineInstagram />
+                <AiOutlineInstagram aria-hidden="true" />
               </a>
             </div>
           </Block>
         </Fade>
 
         <ArrowUp onClick={scrollUp} aria-label="Back to top">
-          <AiOutlineArrowUp />
+          <AiOutlineArrowUp aria-hidden="true" />
         </ArrowUp>
       </Profile>
 
       <Form>
         <Fade direction="up" triggerOnce>
-          <form onSubmit={sendEmail}>
-            <Field>
-              <span>
-                <CgProfile />
-              </span>
-              <input
-                type="text"
-                placeholder="Full name..."
-                name="user_name"
-                value={formData.name}
-                onChange={handleChange("name")}
-              />
-            </Field>
-            <Field>
-              <span>
-                <MdAlternateEmail />
-              </span>
-              <input
-                type="email"
-                placeholder="Email..."
-                name="user_email"
-                value={formData.email}
-                onChange={handleChange("email")}
-              />
-            </Field>
-            <Field className="message">
-              <span>
-                <FiMail />
-              </span>
-              <textarea
-                cols="30"
-                rows="6"
-                placeholder="Message..."
-                name="message"
-                value={formData.message}
-                onChange={handleChange("message")}
-              />
-            </Field>
-            {formData.error && (
-              <div className="error">
-                <span>{formData.error}</span>
-              </div>
-            )}
-            <SubmitRow>
-              {loader ? (
-                <div className="loader" />
-              ) : (
-                <SubmitButton type="submit" value="Send">
-                  Submit
-                </SubmitButton>
+          {/* noValidate: we own the messages, so the browser's native bubbles
+              don't fire first and bypass our styled, announced errors. */}
+          <form ref={formRef} onSubmit={sendEmail} noValidate>
+            <FieldGroup>
+              <label className="sr-only" htmlFor="contact-name">
+                Full name
+              </label>
+              <Field>
+                <span>
+                  <CgProfile aria-hidden="true" />
+                </span>
+                <input
+                  type="text"
+                  placeholder="Full name…"
+                  autoComplete="name"
+                  {...fieldProps("name")}
+                />
+              </Field>
+              {errors.name && (
+                <FieldError id="contact-name-error">{errors.name}</FieldError>
               )}
+            </FieldGroup>
+
+            <FieldGroup>
+              <label className="sr-only" htmlFor="contact-email">
+                Email address
+              </label>
+              <Field>
+                <span>
+                  <MdAlternateEmail aria-hidden="true" />
+                </span>
+                <input
+                  type="email"
+                  placeholder="you@company.com"
+                  autoComplete="email"
+                  inputMode="email"
+                  spellCheck={false}
+                  {...fieldProps("email")}
+                />
+              </Field>
+              {errors.email && (
+                <FieldError id="contact-email-error">{errors.email}</FieldError>
+              )}
+            </FieldGroup>
+
+            <FieldGroup>
+              <label className="sr-only" htmlFor="contact-message">
+                Message
+              </label>
+              <Field className="message">
+                <span>
+                  <FiMail aria-hidden="true" />
+                </span>
+                <textarea rows="6" placeholder="Message…" {...fieldProps("message")} />
+              </Field>
+              {errors.message && (
+                <FieldError id="contact-message-error">{errors.message}</FieldError>
+              )}
+            </FieldGroup>
+
+            <SubmitRow>
+              <SubmitButton type="submit" disabled={loader} aria-busy={loader}>
+                {loader ? (
+                  <>
+                    <span className="loader" aria-hidden="true" />
+                    Sending…
+                  </>
+                ) : (
+                  "Send message"
+                )}
+              </SubmitButton>
             </SubmitRow>
           </form>
         </Fade>
@@ -207,7 +268,7 @@ const Footer = () => {
 
 export default Footer;
 
-const Container = styled.div`
+const Container = styled.footer`
   position: relative;
   padding: var(--spacing-120) 0 var(--spacing-96);
   width: 86%;
@@ -248,7 +309,8 @@ const Identity = styled.div`
   h2 {
     font-size: var(--text-heading-sm);
     font-weight: 400;
-    letter-spacing: -1px;
+    letter-spacing: var(--tracking-heading);
+    text-wrap: balance;
     color: var(--color-bone-white);
   }
 `;
@@ -265,7 +327,7 @@ const Eyebrow = styled.p`
 const Block = styled.div`
   padding-bottom: var(--spacing-30);
 
-  h4 {
+  h3 {
     font-size: var(--text-nav-label);
     font-weight: 600;
     text-transform: uppercase;
@@ -276,7 +338,7 @@ const Block = styled.div`
 
   p {
     font-size: var(--text-body);
-    font-weight: 200;
+    font-weight: 300;
     color: var(--color-silver-mist);
   }
 
@@ -292,10 +354,18 @@ const Block = styled.div`
     }
 
     a {
+      position: relative;
       text-decoration: none;
       color: var(--color-bone-white);
-      font-weight: 200;
+      font-weight: 300;
       font-size: var(--text-body);
+      transition: color 250ms ease-in-out;
+
+      ::after {
+        content: "";
+        position: absolute;
+        inset: -6px -4px;
+      }
 
       :hover {
         color: var(--color-saffron-spark);
@@ -313,6 +383,16 @@ const Block = styled.div`
       font-size: 1.3rem;
       display: flex;
       transition: color 250ms ease-in-out, transform 250ms ease-in-out;
+
+      /* Expands the tap target to ~37px without moving the icon a pixel;
+         19px glyphs are well under the 24px minimum on touch. */
+      position: relative;
+
+      ::after {
+        content: "";
+        position: absolute;
+        inset: -9px;
+      }
 
       :hover {
         color: var(--color-electric-iris);
@@ -354,13 +434,19 @@ const Form = styled.div`
   }
 `;
 
+const FieldGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+`;
+
 const Field = styled.div`
   display: flex;
   align-items: center;
   gap: var(--spacing-12);
   border-bottom: 1px solid rgba(255, 255, 255, 0.18);
   padding-bottom: var(--spacing-12);
-  transition: border-color 250ms ease-in-out;
+  transition: border-color 250ms ease-in-out, box-shadow 250ms ease-in-out;
 
   &.message {
     align-items: flex-start;
@@ -370,6 +456,7 @@ const Field = styled.div`
     color: var(--color-ash-gray);
     display: flex;
     padding-top: 2px;
+    transition: color 250ms ease-in-out;
   }
 
   &.message span {
@@ -385,7 +472,7 @@ const Field = styled.div`
     color: var(--color-bone-white);
     background-color: transparent;
     font-size: var(--text-body);
-    font-weight: 200;
+    font-weight: 300;
   }
 
   input::placeholder,
@@ -393,13 +480,27 @@ const Field = styled.div`
     color: var(--color-ash-gray);
   }
 
+  /* The inputs drop their own outline, so the underline has to carry the
+     focus state — doubled to 2px, it reads at a glance. */
   :focus-within {
     border-color: var(--color-electric-iris);
+    box-shadow: 0 1px 0 0 var(--color-electric-iris);
   }
 
   :focus-within span {
     color: var(--color-electric-iris);
   }
+
+  &:has(input[aria-invalid="true"]),
+  &:has(textarea[aria-invalid="true"]) {
+    border-color: rgb(255, 82, 82);
+  }
+`;
+
+const FieldError = styled.p`
+  color: rgb(255, 82, 82);
+  font-size: var(--text-nav-label);
+  font-weight: 500;
 `;
 
 const SubmitRow = styled.div`
@@ -409,6 +510,9 @@ const SubmitRow = styled.div`
 `;
 
 const SubmitButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-12);
   background-color: var(--color-electric-iris);
   color: var(--color-bone-white);
   border: none;
@@ -419,10 +523,16 @@ const SubmitButton = styled.button`
   text-transform: uppercase;
   letter-spacing: 0.025em;
   cursor: pointer;
-  transition: filter 250ms ease-in-out, transform 250ms ease-in-out;
+  transition: filter 250ms ease-in-out, transform 250ms ease-in-out,
+    opacity 250ms ease-in-out;
 
-  :hover {
+  :hover:not(:disabled) {
     filter: brightness(1.12);
     transform: translateY(-1px);
+  }
+
+  :disabled {
+    opacity: 0.75;
+    cursor: progress;
   }
 `;

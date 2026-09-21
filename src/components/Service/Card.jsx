@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Card = ({ Icon, title, disc }) => {
   return (
     <Container>
-      <Icon />
+      <Icon aria-hidden="true" />
       <h3>{title}</h3>
       <p>{disc}</p>
     </Container>
@@ -25,16 +25,18 @@ const Container = styled.div`
   h3 {
     font-size: var(--text-heading-2xs);
     font-weight: 400;
-    letter-spacing: -0.48px;
+    letter-spacing: var(--tracking-heading);
+    text-wrap: balance;
     color: var(--color-bone-white);
     margin-bottom: var(--spacing-12);
   }
 
   p {
     font-size: var(--text-body);
-    font-weight: 200;
+    font-weight: 300;
     color: var(--color-silver-mist);
-    line-height: 1.5;
+    line-height: 1.55;
+    text-wrap: pretty;
     max-width: 340px;
   }
 `;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const NAV_LINKS = [
@@ -13,6 +13,25 @@ const Header = () => {
   const [bar, setBar] = useState(false);
 
   const closeMenu = () => setBar(false);
+
+  // While the full-screen menu is open, Escape closes it and the page
+  // underneath stays put instead of scrolling away behind the overlay.
+  useEffect(() => {
+    if (!bar) return undefined;
+
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setBar(false);
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [bar]);
 
   return (
     <Container bar={bar}>
@@ -29,7 +48,7 @@ const Header = () => {
         <span>Harun</span>
       </Logo>
 
-      <Nav bar={bar}>
+      <Nav id="primary-navigation" aria-label="Primary" bar={bar}>
         {NAV_LINKS.map((link) => (
           <a key={link.href} href={link.href} onClick={closeMenu}>
             {link.label}
@@ -42,7 +61,13 @@ const Header = () => {
 
       <Actions>
         <CtaButton href="#footer">Let&rsquo;s talk</CtaButton>
-        <Bars onClick={() => setBar(!bar)} bar={bar} aria-label="Toggle menu">
+        <Bars
+          onClick={() => setBar(!bar)}
+          bar={bar}
+          aria-label={bar ? "Close menu" : "Open menu"}
+          aria-expanded={bar}
+          aria-controls="primary-navigation"
+        >
           <span />
         </Bars>
       </Actions>
@@ -110,10 +135,20 @@ const Nav = styled.nav`
     align-items: center;
     background-color: var(--color-void);
     gap: var(--spacing-36);
-    height: ${(p) => (p.bar ? "100vh" : 0)};
-    overflow: hidden;
-    transition: height 400ms ease-in-out;
+    /* dvh, not vh: mobile browser chrome otherwise clips the last item. */
+    height: 100dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* Slide the panel rather than animating its height — a height
+       transition reflows the whole page on every one of the 400ms. */
+    transform: ${(p) => (p.bar ? "translateY(0)" : "translateY(-100%)")};
+    /* visibility (not just the transform) is what takes the closed links
+       out of the tab order; off-screen alone leaves them focusable. */
+    visibility: ${(p) => (p.bar ? "visible" : "hidden")};
+    transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 400ms ease-in-out;
     z-index: 15;
+    padding: var(--spacing-60) var(--spacing-24);
 
     a {
       font-size: var(--text-heading-2xs);
@@ -178,8 +213,8 @@ const Bars = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     position: relative;
     z-index: 20;
 
@@ -188,7 +223,7 @@ const Bars = styled.button`
       width: 22px;
       height: 2px;
       background-color: ${(p) => (p.bar ? "transparent" : "#fff")};
-      transition: all 300ms ease-in-out;
+      transition: background-color 300ms ease-in-out;
 
       ::before,
       ::after {
@@ -198,16 +233,15 @@ const Bars = styled.button`
         height: 2px;
         background-color: #fff;
         left: 0;
+        transition: transform 300ms ease-in-out;
       }
 
       ::before {
         transform: ${(p) => (p.bar ? "rotate(45deg)" : "translateY(-7px)")};
-        transition: all 300ms ease-in-out;
       }
 
       ::after {
         transform: ${(p) => (p.bar ? "rotate(-45deg)" : "translateY(7px)")};
-        transition: all 300ms ease-in-out;
       }
     }
   }

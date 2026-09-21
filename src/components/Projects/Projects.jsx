@@ -47,7 +47,8 @@ const Eyebrow = styled.p`
 const Headline = styled.h2`
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 400;
-  letter-spacing: -1.68px;
+  letter-spacing: var(--tracking-heading);
+  text-wrap: balance;
   color: var(--color-bone-white);
 `;
 
@@ -55,9 +56,10 @@ const SubBody = styled.p`
   margin-top: var(--spacing-18);
   max-width: 520px;
   font-size: var(--text-body);
-  font-weight: 200;
+  font-weight: 300;
   color: var(--color-silver-mist);
-  line-height: 1.5;
+  line-height: 1.55;
+  text-wrap: pretty;
 `;
 
 const SliderWrap = styled.div`

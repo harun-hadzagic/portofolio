@@ -38,23 +38,36 @@ const Hero3D = () => {
 
   const orbSpeed = 0.1 + progress * 0.12;
 
+  // Opacity alone leaves a faded panel in the tab order and in the
+  // accessibility tree; visibility is what actually retires it, so only the
+  // panel currently on screen can be tabbed into or read out.
+  const panelStyle = (opacity, interactive = false) => ({
+    opacity,
+    visibility: opacity <= 0.02 ? "hidden" : "visible",
+    pointerEvents: interactive && opacity > 0.15 ? "auto" : "none",
+  });
+
   return (
     <Wrapper ref={wrapperRef} id="home">
       <Sticky>
         <Row>
           <TextPane>
-            <Panel style={{ opacity: stage0Opacity, pointerEvents: stage0Opacity > 0.15 ? "auto" : "none" }}>
+            <Panel style={panelStyle(stage0Opacity, true)}>
               <HeroIntro />
             </Panel>
-            <Panel style={{ opacity: stage1Opacity, pointerEvents: "none" }}>
+            <Panel style={panelStyle(stage1Opacity)}>
               <Statement>{STATEMENTS[0]}</Statement>
             </Panel>
-            <Panel style={{ opacity: stage2Opacity, pointerEvents: "none" }}>
+            <Panel style={panelStyle(stage2Opacity)}>
               <Statement>{STATEMENTS[1]}</Statement>
             </Panel>
           </TextPane>
           <VisualPane aria-hidden="true">
-            <ParticleOrb speed={orbSpeed} active={inView} />
+            <ParticleOrb
+              speed={orbSpeed}
+              active={inView}
+              affordance={stage0Opacity > 0.9}
+            />
           </VisualPane>
         </Row>
       </Sticky>
@@ -100,29 +113,22 @@ const Panel = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: opacity 200ms linear;
+  transition: opacity 200ms linear, visibility 200ms linear;
 `;
 
 const Statement = styled.p`
   font-size: clamp(28px, 3.4vw, 42px);
   font-weight: 400;
   line-height: 1.25;
-  letter-spacing: -1px;
+  letter-spacing: var(--tracking-heading);
+  text-wrap: balance;
   color: var(--color-bone-white);
   max-width: 560px;
 `;
 
 const VisualPane = styled.div`
+  position: relative;
   flex: 1;
   min-width: 0;
   height: clamp(380px, 58vh, 620px);
-
-  /* Dissolve the canvas rectangle so its edge never reads as a hard cut-off. */
-  --orb-fade: radial-gradient(
-    ellipse closest-side at 50% 50%,
-    #000 0 90%,
-    transparent 100%
-  );
-  -webkit-mask-image: var(--orb-fade);
-  mask-image: var(--orb-fade);
 `;

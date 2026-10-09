@@ -1,6 +1,7 @@
 import React from "react";
 import Project from "./Project";
 import Carousel from "../common/Carousel";
+import keyAiSeo from "../../assets/images/key-ai-seo.jpg";
 import accentuate from "../../assets/images/accentuate.jpg";
 import uallaby from "../../assets/images/uallaby.jpg";
 import koenigPergola from "../../assets/images/koenig-pergola.jpg";
@@ -16,6 +17,13 @@ import meetups from "../../assets/images/meetups.jpg";
 import challenges from "../../assets/images/challenges.png";
 
 const data = [
+  {
+    img: keyAiSeo,
+    title: "Key AI SEO",
+    disc: "A Shopify app that gets stores found in ChatGPT, Perplexity and AI Overviews — bulk-optimizing meta tags, alt text and schema, and generating AI FAQs for conversational search.",
+    demo: "https://apps.shopify.com/key-ai-seo-1",
+    demoLabel: "View on Shopify",
+  },
   {
     img: accentuate,
     title: "Accentuate Custom Fields",

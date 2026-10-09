@@ -30,7 +30,6 @@ const toastOptions = {
 };
 
 const Footer = () => {
-  const formRef = useRef(null);
   const fieldRefs = {
     name: useRef(null),
     email: useRef(null),
@@ -72,6 +71,12 @@ const Footer = () => {
   const sendEmail = (e) => {
     e.preventDefault();
 
+    // The submit event carries the form itself. A ref would be cleaner to read
+    // but react-awesome-reveal rebuilds its direct child from type and props,
+    // and a ref is not a prop — so any ref placed on this <form> is silently
+    // dropped and EmailJS is handed null.
+    const form = e.currentTarget;
+
     const nextErrors = validate();
     setErrors(nextErrors);
 
@@ -88,7 +93,7 @@ const Footer = () => {
       .sendForm(
         "service_t8dni6r",
         "template_2sa8xqd",
-        formRef.current,
+        form,
         "ac8Lt9gkcjvry3bRl"
       )
       .then(
@@ -98,7 +103,16 @@ const Footer = () => {
           toast.dark("Message sent!", toastOptions);
           setLoader(false);
         },
-        () => {
+        (error) => {
+          // EmailJS rejects with { status, text } naming the actual cause — an
+          // expired mail-service token, an exhausted quota, a blocked origin.
+          // The visitor gets the friendly line; the console gets the reason,
+          // because a form that fails silently is a form nobody can fix.
+          console.error(
+            "EmailJS send failed:",
+            error?.status ?? "",
+            error?.text ?? error
+          );
           toast.dark(
             "Couldn't send that — please try again, or email me directly.",
             toastOptions
@@ -189,7 +203,7 @@ const Footer = () => {
         <Fade direction="up" triggerOnce>
           {/* noValidate: we own the messages, so the browser's native bubbles
               don't fire first and bypass our styled, announced errors. */}
-          <form ref={formRef} onSubmit={sendEmail} noValidate>
+          <form onSubmit={sendEmail} noValidate>
             <FieldGroup>
               <label className="sr-only" htmlFor="contact-name">
                 Full name

@@ -4,6 +4,7 @@ import Carousel from "../common/Carousel";
 import keyAiSeo from "../../assets/images/key-ai-seo.jpg";
 import accentuate from "../../assets/images/accentuate.jpg";
 import uallaby from "../../assets/images/uallaby.jpg";
+import stechak from "../../assets/images/stechak.jpg";
 import koenigPergola from "../../assets/images/koenig-pergola.jpg";
 import dankuchen from "../../assets/images/dankuchen.jpg";
 import bhTours from "../../assets/images/bh-tours.jpg";
@@ -36,6 +37,13 @@ const data = [
     title: "Uallaby",
     disc: "An Italian tech company putting generative AI to work for business — I worked on the app behind the platform.",
     demo: "https://uallaby.ai/",
+    demoLabel: "Visit site",
+  },
+  {
+    img: stechak,
+    title: "STECHAK",
+    disc: "Storefront, custom store UI, domain and the entire Shopify setup for a Bosnian apparel brand whose T-shirts carry motifs from medieval stećak tombstones, presented as an exhibition.",
+    demo: "https://stechak.shop/",
     demoLabel: "Visit site",
   },
   {

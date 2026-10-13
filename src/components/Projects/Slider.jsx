@@ -63,7 +63,7 @@ const data = [
   {
     img: jsVulnModel,
     title: "Insecure JS Detection Model",
-    disc: "A CodeBERT model fine-tuned to flag vulnerable JavaScript — 99% accurate on the held-out test set and 81% on code it had never seen before.",
+    disc: "A CodeBERT model fine-tuned to flag vulnerable JavaScript — 95.35% accurate with a 94.13% F1-score and 94.65% recall on a held-out test set of unseen vulnerability patterns.",
     demo: "https://github.com/harun-hadzagic/model-for-detecting-insecure-js-code",
     demoLabel: "View on GitHub",
   },
